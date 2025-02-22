@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser"
 import authRoutes from "./Routes/auth.route.js"
 import { connectDB } from "./lib/db.js";
-
+import messageRoute from "./Routes/message.route.js"
 const app=express();
 
 app.use(express.json());
@@ -12,6 +12,7 @@ app.use(cookieParser());
 dotenv.config({ path: "../.env" });
 // Middleware and Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/message",messageRoute);
 
 app.get("/",(req,res)=>{
     res.send("Working");
