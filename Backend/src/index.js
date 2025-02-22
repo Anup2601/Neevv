@@ -1,12 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
-const app=express();
-
+import cookieParser from "cookie-parser"
 import authRoutes from "./Routes/auth.route.js"
 import { connectDB } from "./lib/db.js";
 
-app.use(express.json());
+const app=express();
 
+app.use(express.json());
+app.use(cookieParser());
 // Load environment variables
 dotenv.config({ path: "../.env" });
 // Middleware and Routes
