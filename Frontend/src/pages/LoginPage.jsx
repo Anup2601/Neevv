@@ -29,7 +29,7 @@ const LoginPage = () => {
                   <MessageSquare className='size-6 text-primary '/>
                 </div>
                 <h1 className='text-2xl font-bold mt-2 '>Welcom Back</h1>
-                <p className='text-base-content/60 '>Sing in to your Account</p>
+                <p className='text-base-content/60 '>Sign in to your Account</p>
               </div>
             </div>
             <form onSubmit={handleSubmition} className='space-y-6 '>
@@ -96,7 +96,7 @@ const LoginPage = () => {
             <div className=' text-center'>
               <p className='text-base-content/60 '>
                 Don&apos;t have an Account?{" "}
-                <Link to="/sigin" className='link link-primary '>
+                <Link to="/signup" className='link link-primary '>
                   Create Account 
                 </Link>
               </p>
