@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useChatStore } from "../store/useChatStore"
 import { Users } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
+import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 
 function Sidebar() {
   const {getUsers, users=[], selectedUser, setSelectedUser ,isUsersLoading, getMessages} = useChatStore()
@@ -21,7 +22,7 @@ function Sidebar() {
   }, [selectedUser, getMessages]);
 
   if(isUsersLoading){
-    return <div>Loading...</div>
+    return <SidebarSkeleton/>
   }
   return (
     <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200 ">
