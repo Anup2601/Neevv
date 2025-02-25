@@ -1,11 +1,20 @@
+import { mongoose } from "mongoose";
 import cloudinary from "../lib/cloudinary.js";
 import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
 
 export const getUsersForSlidebar = async(req,res) =>{
     try {
+        console.log("🔹 Requesting Users for Sidebar...");
+        console.log("🔍 Logged-in User ID:", req.user?._id);
+
+        if (!req.user) {
+            console.warn("⚠️ req.user is undefined!");
+            return res.status(401).json({ message: "Unauthorized: No user info" });
+          }
+          
         const loggedInUserId=req.user._id;
-        const filteredUsers= await User.findOne({_id:{$ne : loggedInUserId}}).select("-password");
+        const filteredUsers= await User.find({_id:{$ne : loggedInUserId}}).select("-password");
         res.status(200).json(filteredUsers);
     } catch (error) {
         console.log("Error in getUsersForSlidebar controller",error.message);
@@ -16,7 +25,15 @@ export const getUsersForSlidebar = async(req,res) =>{
 export const getMessages =async(req,res)=>{
     try {
         const {id:userToChatId}=req.params;
+        console.log("Received user ID:", userToChatId);
         const myId= req.user._id;
+        if(!mongoose.Types.ObjectId.isValid(userToChatId)){
+            return res.status(400).json({message:"Invalid User ID"});
+        }
+        if (!userToChatId || userToChatId === "users") {
+            console.error("❌ Invalid user ID:", userToChatId);
+            return res.status(400).json({ message: "Invalid user ID" });
+        }
         const message=await Message.find({
             $or: [
                 {senderId:myId,receiverId:userToChatId},
@@ -25,7 +42,7 @@ export const getMessages =async(req,res)=>{
         })
         res.status(200).json(message);
     } catch (error) {
-        console.log("Error in getMessages controller",error.message);
+        console.log("Error in getMessages controller:-",error.message);
         res.status(500).json({message:"Internal Server Error"});
     }
 }

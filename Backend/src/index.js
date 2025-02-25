@@ -18,7 +18,7 @@ app.use(cors({
 dotenv.config({ path: "../.env" });
 // Middleware and Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/message",messageRoute);
+app.use("/api/messages",messageRoute);
 
 
 
