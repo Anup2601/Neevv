@@ -2,6 +2,7 @@ import { mongoose } from "mongoose";
 import cloudinary from "../lib/cloudinary.js";
 import Message from "../Models/message.model.js";
 import User from "../Models/user.model.js";
+import { getReceiverSocket, io } from "../lib/socket.js";
 
 export const getUsersForSlidebar = async(req,res) =>{
     try {
@@ -69,6 +70,10 @@ export const sendMessage = async (req,res) => {
         await newMessage.save();
 
         // socket.io work
+        const receiverSocketId= getReceiverSocket(receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage",newMessage);
+        }
 
         res.status(200).json(newMessage);
 

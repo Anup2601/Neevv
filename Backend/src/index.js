@@ -5,8 +5,7 @@ import authRoutes from "./Routes/auth.route.js"
 import { connectDB } from "./lib/db.js";
 import messageRoute from "./Routes/message.route.js"
 import cors from "cors"
-
-const app=express();
+import { app, server } from "./lib/socket.js";
 
 app.use(express.json());
 app.use(cookieParser());
@@ -38,7 +37,7 @@ app.get("/",(req,res)=>{
 // Ensure PORT is properly defined
 const PORT=process.env.PORT || 5000;
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log("listing to port: "+ PORT);
     connectDB();
 });

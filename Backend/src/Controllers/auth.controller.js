@@ -31,6 +31,7 @@ export const signup= async (req,res)=>{
                 fullName:newUser.fullName,
                 email:newUser.email,
                 profilePic:newUser.profilePic,
+                createdAt:newUser.createdAt,
             });
         }
         else{
