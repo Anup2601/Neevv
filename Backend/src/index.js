@@ -6,34 +6,29 @@ import { connectDB } from "./lib/db.js";
 import messageRoute from "./Routes/message.route.js"
 import cors from "cors"
 import { app, server } from "./lib/socket.js";
-
-app.use(express.json());
+dotenv.config({ path: "../.env" });
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5174",
     credentials:true,
     methods:"GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders:["Content-Type","Authorization"],
 }))
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.header("Access-Control-Allow-Origin", "http://localhost:5174");
     res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
     res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.header("Access-Control-Allow-Credentials", "true");
     next();
 });
 // Load environment variables
-dotenv.config({ path: "../.env" });
+
 // Middleware and Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoute);
 
-
-
-app.get("/",(req,res)=>{
-    res.send("Working");
-})
 // Ensure PORT is properly defined
 const PORT=process.env.PORT || 5000;
 

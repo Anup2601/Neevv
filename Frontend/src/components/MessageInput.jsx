@@ -9,12 +9,19 @@ function MessageInput() {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
   const { sendMessage } = useChatStore();
+  const MAX_FILE_SIZE = 100 * 1024; 
+
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim() && !imagePreview) {
       return;
     }
+    // Check if the image exceeds the file size limit
+  if (imagePreview && imagePreview.length > MAX_FILE_SIZE) {
+    toast.error("File size too large. Maximum allowed size is 100 kB.");
+    return;
+  }
 
     try {
       await sendMessage({ 
@@ -29,17 +36,24 @@ function MessageInput() {
       }
 
     } catch (error) {
-      toast.error("Error in sending message", error.response.data.message);
-    }
+      if (error.response && error.response.status === 413) {
+        toast.error("Payload Too Large: File size exceeds the server limit.");
+      } else {
+        toast.error("Error in sending message", error.response?.data?.message || error.message);
+      }    }
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
     if (!file.type.startsWith("image/")){
       toast.error("❌ Error: Please upload an image file");
       return;
     } 
-
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("❌ Error: File size too large. Maximum allowed size is 100 kB.");
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       setImagePreview(reader.result);

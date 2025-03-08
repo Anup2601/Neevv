@@ -26,6 +26,7 @@ export const signup= async (req,res)=>{
             // generate JWT Token
             generateToken(newUser._id,res);
             await newUser.save();
+            
             res.status(200).json({
                 _id:newUser._id,
                 fullName:newUser.fullName,
@@ -89,12 +90,15 @@ export const updateProfile = async (req,res)=>{
         }
 
         const uploadResponse= await cloudinary.uploader.upload(profilePic);
-        const updatedUser= await User.findByIdAndUpdate(userId,{profilePic:uploadResponse.secure_url},{new:true});
+        const updatedUser= await User.findByIdAndUpdate(
+            userId,
+            {profilePic:uploadResponse.secure_url},
+            {new:true});
 
-        res.status(200).json(updateProfile);
+        res.status(200).json(updatedUser);
 
     } catch (error) {
-        console.log("Error in UpdateProfile controller",error.message);
+        console.log("Error in UpdateProfile controller",error);
         res.status(500).json({message:"Internal Server Error"});
     }
 }

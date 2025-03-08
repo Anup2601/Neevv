@@ -2,6 +2,8 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client"; // Corrected import
 import { axiosInstanace } from "../lib/axios";
+import { useNavigate } from 'react-router-dom';
+// const navigate = useNavigate();
 
 const BASIC_URL = "http://localhost:5000";
 
@@ -27,15 +29,18 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  signup: async (data) => {
+  signup: async (data,navigate) => {
     set({ isSigningUp: true }); // Fixed typo
     try {
       const res = await axiosInstanace.post("/auth/signup", data);
       set({ authUser: res.data });
       toast.success("Account created successfully");
       get().connectSocket();
+      navigate("/auth/login");
+      if (navigate) navigate("/auth/login");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Signup failed");
+      console.error("Signup Error:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Signup failed again");
     } finally {
       set({ isSigningUp: false }); // Fixed typo
     }

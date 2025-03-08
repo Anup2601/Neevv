@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore"
 import { Users } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
@@ -8,14 +8,14 @@ function Sidebar() {
   const {getUsers, users=[], selectedUser, setSelectedUser ,isUsersLoading, getMessages} = useChatStore()
 
   const {onlineUsers}= useAuthStore();
-  const [showOnline, setShowOnline] = useState(false);
+  const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
     getUsers();
     console.log("Users data:", users)
   }, [getUsers]);
 
-  const filteredUsers = showOnline ? users.filter((user) => onlineUsers.includes(user._id)) : users;
+  const filteredUsers = showOnlineOnly ? users.filter((user) => onlineUsers.includes(user._id)) : users;
 
   useEffect(() => {
     if (selectedUser) {
@@ -64,7 +64,7 @@ function Sidebar() {
           >
           <div className="relative mx-auto lg:mx-0"> 
             <img
-              src={user.profilePic || "/vite.svg"} 
+              src={user.profilePic || "/avatar.png"} 
               alt={user.fullName}
               className="size-12 object-cover  rounded-full"
             />
@@ -86,6 +86,9 @@ function Sidebar() {
           </div>
           </button>
         ))}
+        {filteredUsers.length === 0 && (
+          <p className="text-center text-base-content/60 py-4">No Online users found</p>
+        )}
       </div>
     </aside>
   )
