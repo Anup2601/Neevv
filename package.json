@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm install --prefix frontend && npm install --prefix backend && npm run build --prefix frontend && npm run build --prefix backend",
+    "start": "npm run start --prefix backend"
   },
   "keywords": [],
   "author": "Anup Mishra",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^6.2.1"
+  }
 }

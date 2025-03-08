@@ -5,7 +5,7 @@ import { axiosInstanace } from "../lib/axios";
 import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate();
 
-const BASIC_URL = "http://localhost:5000";
+const BASIC_URL = import.meta.env.MODE === "development" ? "http://localhost:5000" : "/";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,

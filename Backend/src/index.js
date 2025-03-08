@@ -5,6 +5,7 @@ import authRoutes from "./Routes/auth.route.js"
 import { connectDB } from "./lib/db.js";
 import messageRoute from "./Routes/message.route.js"
 import cors from "cors"
+import path from "path";
 import { app, server } from "./lib/socket.js";
 dotenv.config({ path: "../.env" });
 app.use(express.json({ limit: "10mb" }));
@@ -31,6 +32,14 @@ app.use("/api/messages",messageRoute);
 
 // Ensure PORT is properly defined
 const PORT=process.env.PORT || 5000;
+const __dirname = path.resolve();
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname,"/frontend/dist")));
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+    })
+}
 
 server.listen(PORT,()=>{
     console.log("listing to port: "+ PORT);
