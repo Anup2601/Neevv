@@ -77,7 +77,7 @@ function Sidebar() {
           <div className="hidden lg:block text-left min-w-0 ">
             <div className="font-medium truncate">{user.fullName}</div>
             <div className="text-sm ">
-              {onlineUsers.includes(user.id) ? (
+              {onlineUsers.includes(user._id) ? (
                 <span className="text-green-500">Online</span>
               ) : (
                 <span className="text-base-500">Offline</span>
