@@ -117,10 +117,10 @@ function MessageInput() {
       </div>
       <button
         type="submit"
-        className="btn btn-sm btn-circle"
+        className="btn btn-circle"
         disabled={!text.trim() && !imagePreview}
       >
-        <Send size={22} />
+        <Send size={24} />
       </button>
     </form>
   </div>

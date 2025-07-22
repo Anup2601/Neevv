@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
-import { io } from "socket.io-client"; // Corrected import
+import { io } from "socket.io-client"; 
 import { axiosInstanace } from "../lib/axios";
 import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate();
@@ -9,8 +9,8 @@ const BASIC_URL = import.meta.env.MODE === "development" ? "http://localhost:500
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
-  isSigningUp: false, // Fixed typo
-  isLoggingIn: false, // Fixed property name to match usage
+  isSigningUp: false, 
+  isLoggingIn: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
   onlineUsers: [],
@@ -18,31 +18,29 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      const res = await axiosInstanace.get("/auth/check");
+      const res = await axiosInstanace.get("/auth/check",{ withCredentials: true });
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
-      console.log("Error in checkAuth:", error);
+      console.log(error.response?.data?.message || "Not logged in");
       set({ authUser: null });
     } finally {
       set({ isCheckingAuth: false });
     }
   },
 
-  signup: async (data,navigate) => {
-    set({ isSigningUp: true }); // Fixed typo
+  signup: async (data) => {
+    set({ isSigningUp: true });
     try {
       const res = await axiosInstanace.post("/auth/signup", data);
       set({ authUser: res.data });
       toast.success("Account created successfully");
       get().connectSocket();
-      navigate("/auth/login");
-      if (navigate) navigate("/auth/login");
     } catch (error) {
       console.error("Signup Error:", error.response?.data || error.message);
       toast.error(error.response?.data?.message || "Signup failed again");
     } finally {
-      set({ isSigningUp: false }); // Fixed typo
+      set({ isSigningUp: false });
     }
   },
 
