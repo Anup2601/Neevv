@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -14,6 +14,7 @@ import {Heading3, Loader} from "lucide-react";
 import {Toaster} from "react-hot-toast"
 
 export default function App() {
+const location = useLocation();
 const {authUser,checkAuth,isCheckingAuth ,onlineUsers }=useAuthStore();
 const {theme}=useThemeStore();
 useEffect(()=>{
@@ -32,7 +33,7 @@ if(isCheckingAuth && !authUser){
 
   return (
     <div data-theme={theme} className="dark:bg-dark-500 bg-light-500 min-h-screen">
-      <Navbar/>
+       {location.pathname !== "/" && <Navbar />}
 
        <Routes>
         <Route path="/" element={<LandingPage />} />
