@@ -124,7 +124,8 @@ export default function Landing() {
               <a href="#courses" className="text-gray-700 hover:text-blue-600 transition-colors">Courses</a>
               <a href="#mentors" className="text-gray-700 hover:text-blue-600 transition-colors">Mentors</a>
               <a href="#events" className="text-gray-700 hover:text-blue-600 transition-colors">Events</a>
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300"
+              onClick={() => { window.location.href = '/signup'; }}>
                 Get Started
               </button>
             </div>
@@ -145,7 +146,8 @@ export default function Landing() {
               <a href="#courses" className="block py-2 text-gray-700">Courses</a>
               <a href="#mentors" className="block py-2 text-gray-700">Mentors</a>
               <a href="#events" className="block py-2 text-gray-700">Events</a>
-              <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg mt-2">
+              <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg mt-2"
+              onClick={() => { window.location.href = '/signup'; }}>
                 Get Started
               </button>
             </div>
@@ -176,7 +178,8 @@ export default function Landing() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center group">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center group"
+              onClick={() => { window.location.href = '/login'; }}>
                 Start Learning Now
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
