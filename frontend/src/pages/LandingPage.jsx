@@ -18,7 +18,7 @@ import {
   Zap
 } from 'lucide-react';
 
-export default function EduMentorLanding() {
+export default function Landing() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
@@ -115,7 +115,7 @@ export default function EduMentorLanding() {
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                EduMentor
+                Neev
               </span>
             </div>
             
@@ -244,7 +244,7 @@ export default function EduMentorLanding() {
             What Our Learners Say
           </h2>
           <p className="text-blue-100 mb-12 text-lg">
-            Join thousands of professionals who have transformed their careers with EduMentor
+            Join thousands of professionals who have transformed their careers with Neev
           </p>
 
           <div className="relative">
@@ -321,7 +321,7 @@ export default function EduMentorLanding() {
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  EduMentor
+                  Neev
                 </span>
               </div>
               <p className="text-gray-600 mb-4 max-w-md">
@@ -355,7 +355,7 @@ export default function EduMentorLanding() {
           </div>
 
           <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-600">
-            <p>&copy; 2025 EduMentor. All rights reserved.</p>
+            <p>&copy; 2025 Neev. All rights reserved.</p>
           </div>
         </div>
       </footer>
