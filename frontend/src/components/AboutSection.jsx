@@ -11,7 +11,7 @@ const AboutSection = () => {
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Another Chat App</span>
             </h2>
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              Talkify was born from the need for a safe space where developers can be themselves. 
+              Neev was born from the need for a safe space where developers can be themselves. 
               Whether you're looking for a coding partner, want to discuss the latest tech trends, 
               or hoping to find someone special who understands your passion for programming.
             </p>

@@ -1,4 +1,4 @@
-# Talkify
+# Neev
 
 ## Overview
 This is a real-time chat application built using the MERN (MongoDB, Express.js, React, Node.js) stack with Socket.io for instant messaging. The application allows users to sign up, log in, and chat with others in real time. The chat system is built with modern UI components and efficient state management.
@@ -97,7 +97,7 @@ npm run dev
 
 ## Folder Structure
 ```
-Talkify/
+Neev/
 │── backend/
 │   ├── src/
 |   |   ├── controllers/

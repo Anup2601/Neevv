@@ -24,7 +24,7 @@ const Header = () => {
             <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-lg">
               <MessageCircle className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Talkify</span>
+            <span className="text-xl font-bold text-white">Neev</span>
           </div>
           <nav className="hidden md:flex space-x-8">
             <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>

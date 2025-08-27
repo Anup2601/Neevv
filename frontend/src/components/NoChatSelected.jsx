@@ -13,7 +13,7 @@ function NoChatSelected() {
                 </div>
             </div>
             {/* Welcome text  */}
-            <h2 className=' text-2xl font-bold'>Welcome to Talkify</h2>
+            <h2 className=' text-2xl font-bold'>Welcome to Neev</h2>
             <p className='text-base-content/60 '>
                 Select a user to start chatting with them.
             </p>

@@ -10,7 +10,7 @@ const Footer = () => {
               <div className="bg-gradient-to-r from-purple-500 to-pink-500 p-2 rounded-lg">
                 <MessageCircle className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">Talkify</span>
+              <span className="text-xl font-bold text-white">Neev</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Connecting developers worldwide through secure, private, and meaningful conversations.
@@ -51,7 +51,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 Talkify. Made with ❤️ by developers, for developers. No data harvesting, ever.
+            © 2025 Neev. Made with ❤️ by developers, for developers. No data harvesting, ever.
           </p>
         </div>
       </div>
