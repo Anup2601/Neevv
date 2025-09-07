@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 import { 
   BookOpen, 
   Search, 
@@ -31,6 +32,8 @@ export const Navbar = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const navigate = useNavigate();
+  
   const handleNavClick = (item) => {
     toast.success(`Navigating to ${item}`, {
       duration: 2000,
@@ -49,10 +52,8 @@ export const Navbar = () => {
   };
 
   const handleLogout = () => {
-    toast.success('Logged out successfully!', {
-      duration: 2000,
-    });
     logout();
+    navigate("/");
   };
 
   const moreItems = [
