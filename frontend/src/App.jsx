@@ -13,6 +13,8 @@ import { useEffect } from "react";
 import {Heading3, Loader} from "lucide-react";
 import {Toaster} from "react-hot-toast"
 import HomePage from "./pages/HomePage";
+import About from "./components/landing/About";
+import ContactMain from "./components/landing/Contact";
 
 export default function App() {
 const location = useLocation();
@@ -34,10 +36,12 @@ if(isCheckingAuth && !authUser){
 
   return (
     <div data-theme={theme} className="dark:bg-dark-500 bg-light-500 min-h-screen">
-       {location.pathname !== "/" && <Navbar />}
+       {location.pathname !== "/" && location.pathname !== "/about" && location.pathname !== "/contact" && <Navbar />}
 
        <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactMain />} />
         <Route path="/home" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/chat" element={authUser ? <ChatHomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/home" />} />

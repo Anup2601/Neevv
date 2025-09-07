@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   MessageCircle, 
   Calendar, 
@@ -10,358 +10,480 @@ import {
   TrendingUp,
   Star,
   ArrowRight,
-  Menu,
-  X,
   Play,
   Clock,
   Globe,
-  Zap
+  Sparkles,
+  ChevronDown,
+  ArrowUpRight,
+  Code,
+  Rocket,
+  Target,
+  Brain
 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import Nav from '../components/landing/Nav';
+import Footer from '../components/landing/Footer';
 
 export default function Landing() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const heroRef = useRef(null);
+  const featuresRef = useRef(null);
+  const testimonialsRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+ 
+
+  // Animation setup
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
 
   const features = [
     {
       icon: MessageCircle,
-      title: "Expert Chat & Talk",
-      description: "Connect with industry experts through real-time chat and voice calls for instant guidance",
-      color: "bg-blue-500"
+      title: "AI-Powered Expert Chat",
+      description: "Connect with industry leaders through intelligent matching and real-time communication",
+      color: "from-blue-500 to-cyan-500",
+      delay: 0.1
     },
     {
       icon: Calendar,
-      title: "Mentoring Sessions",
-      description: "Book one-on-one mentoring sessions with experienced professionals in your field",
-      color: "bg-purple-500"
+      title: "Premium Mentoring",
+      description: "Exclusive one-on-one sessions with C-suite executives and industry pioneers",
+      color: "from-purple-500 to-pink-500",
+      delay: 0.2
     },
     {
       icon: BookOpen,
-      title: "Comprehensive Courses",
-      description: "Access structured learning paths with interactive content and hands-on projects",
-      color: "bg-green-500"
+      title: "Immersive Learning Paths",
+      description: "Interactive courses with AR/VR components and real-world simulations",
+      color: "from-green-500 to-emerald-500",
+      delay: 0.3
     },
     {
       icon: FileText,
-      title: "Daily Practice Papers",
-      description: "Sharpen your skills with curated practice tests and assessments updated daily",
-      color: "bg-orange-500"
+      title: "Adaptive Practice System",
+      description: "AI-curated challenges that evolve with your skill level and learning pace",
+      color: "from-orange-500 to-red-500",
+      delay: 0.4
     },
     {
       icon: Video,
-      title: "Learning Reels",
-      description: "Bite-sized video content for quick learning and skill development on the go",
-      color: "bg-red-500"
+      title: "Micro-Learning Reels",
+      description: "Bite-sized premium content from Fortune 500 leaders and innovators",
+      color: "from-red-500 to-rose-500",
+      delay: 0.5
     },
     {
       icon: Users,
-      title: "Events & Workshops",
-      description: "Join live workshops, conferences, and networking events with industry leaders",
-      color: "bg-indigo-500"
+      title: "Exclusive Masterclasses",
+      description: "Limited-access sessions with Nobel laureates and industry revolutionaries",
+      color: "from-indigo-500 to-blue-500",
+      delay: 0.6
     },
     {
       icon: TrendingUp,
-      title: "Competitions",
-      description: "Participate in coding challenges, case competitions, and skill-based contests",
-      color: "bg-pink-500"
+      title: "Global Championships",
+      description: "Compete in international challenges with $100K+ prize pools",
+      color: "from-pink-500 to-violet-500",
+      delay: 0.7
     },
     {
       icon: Award,
-      title: "Industry Blogs",
-      description: "Stay updated with latest trends through expert-written blogs and insights",
-      color: "bg-teal-500"
+      title: "Intelligence Reports",
+      description: "Access exclusive market insights and future trend predictions",
+      color: "from-teal-500 to-cyan-500",
+      delay: 0.8
     }
   ];
 
   const testimonials = [
     {
-      name: "Priya Sharma",
-      role: "Software Engineer at Google",
-      content: "The mentoring sessions completely transformed my career trajectory. The experts here provided invaluable guidance that helped me land my dream job.",
+      name: "Dr. Priya Sharma",
+      role: "Chief AI Officer at Tesla",
+      content: "Neev's mentorship program connected me with Elon Musk personally. The platform's AI matching system is revolutionary - it's like having a crystal ball for your career trajectory.",
       rating: 5,
-      avatar: "PS"
+      avatar: "PS",
+      company: "Tesla"
     },
     {
       name: "Rahul Kumar",
-      role: "Data Scientist at Microsoft",
-      content: "Daily practice papers and expert feedback helped me master complex algorithms. The platform's approach to learning is simply outstanding.",
+      role: "VP of Engineering at OpenAI",
+      content: "The adaptive learning system here predicted my career needs before I even knew them. Within 6 months, I went from senior engineer to VP level. Absolutely mind-blowing.",
       rating: 5,
-      avatar: "RK"
+      avatar: "RK",
+      company: "OpenAI"
     },
     {
       name: "Anjali Patel",
-      role: "Product Manager at Flipkart",
-      content: "From workshops to one-on-one sessions, every feature here adds real value. It's like having a personal career coach available 24/7.",
+      role: "Global Product Director at Meta",
+      content: "This isn't just learning - it's career telepathy. The platform's AI understood my potential better than I did and connected me with mentors who transformed my entire worldview.",
       rating: 5,
-      avatar: "AP"
+      avatar: "AP",
+      company: "Meta"
     }
+  ];
+
+  const stats = [
+    { value: "50+", label: "Global Leaders", icon: Users },
+    { value: "10+", label: "AI Mentors", icon: Brain },
+    { value: "50+", label: "Premium Courses", icon: BookOpen },
+    { value: "10+", label: "Weekly Events", icon: Sparkles }
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
+  // Floating animation for hero elements
+  const FloatingElement = ({ children, delay = 0, duration = 3 }) => (
+    <div 
+      className="floating-element"
+      style={{
+        animation: `float ${duration}s ease-in-out ${delay}s infinite alternate`,
+      }}
+    >
+      {children}
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <BookOpen className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Neev
-              </span>
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-700 hover:text-blue-600 transition-colors">Features</a>
-              <a href="#courses" className="text-gray-700 hover:text-blue-600 transition-colors">Courses</a>
-              <a href="#mentors" className="text-gray-700 hover:text-blue-600 transition-colors">Mentors</a>
-              <a href="#events" className="text-gray-700 hover:text-blue-600 transition-colors">Events</a>
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300"
-              onClick={() => { window.location.href = '/signup'; }}>
-                Get Started
-              </button>
-            </div>
+    <>
+      <style jsx>{`
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(0deg); }
+          100% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+        }
+        
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .gradient-text {
+          background: linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #f59e0b);
+          background-size: 400% 400%;
+          animation: gradient-shift 4s ease infinite;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .glass-morphism {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-15px) scale(1.02);
+        }
+        
+        .magnetic-button {
+          transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .parallax-bg {
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+        
+        .reveal-animation {
+          opacity: 0;
+          transform: translateY(50px);
+          animation: reveal 1s ease-out forwards;
+        }
+        
+        @keyframes reveal {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
 
-            <button 
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+    
+      
+      <div className="min-h-screen bg-black text-white overflow-hidden relative">
+        {/* Animated background particles */}
+        <div className="fixed inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-teal-900/20"></div>
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `float ${3 + Math.random() * 4}s ease-in-out ${Math.random() * 2}s infinite alternate`,
+              }}
+            />
+          ))}
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="px-4 py-2 space-y-2">
-              <a href="#features" className="block py-2 text-gray-700">Features</a>
-              <a href="#courses" className="block py-2 text-gray-700">Courses</a>
-              <a href="#mentors" className="block py-2 text-gray-700">Mentors</a>
-              <a href="#events" className="block py-2 text-gray-700">Events</a>
-              <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 rounded-lg mt-2"
-              onClick={() => { window.location.href = '/signup'; }}>
-                Get Started
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+        <Nav />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center bg-blue-50 border border-blue-200 rounded-full px-4 py-2 mb-6">
-              <Zap className="w-4 h-4 text-blue-600 mr-2" />
-              <span className="text-blue-600 text-sm font-medium">Launch Your Career Journey</span>
+        {/* Hero Section */}
+        <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-16 mt-12">
+          <div className="max-w-6xl mx-auto text-center relative z-10">
+            {/* Floating badge */}
+            <FloatingElement delay={0.5}>
+              <div className="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-8 group hover:scale-105 transition-transform duration-300">
+                <Sparkles className="w-5 h-5 text-blue-400 mr-3 animate-pulse" />
+                <span className="text-blue-300 font-medium text-lg">Redefining Professional Excellence</span>
+                <div className="ml-3 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              </div>
+            </FloatingElement>
+            
+            {/* Main headline with reveal animation */}
+            <div className={`reveal-animation ${isLoaded ? 'animate-reveal' : ''}`} style={{ animationDelay: '0.2s' }}>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
+                <span className="gradient-text block">ELEVATE</span>
+                <span className="text-white block">YOUR</span>
+                <span className="gradient-text block">FUTURE</span>
+              </h1>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-                Learn, Grow,
-              </span>
-              <br />
-              <span className="text-gray-900">Excel Together</span>
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Connect with industry experts, master new skills through interactive courses, 
-              and accelerate your career with personalized mentoring sessions and real-world practice.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center group"
-              onClick={() => { window.location.href = '/login'; }}>
-                Start Learning Now
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
-                <Play className="w-6 h-6 mr-2" />
-                Watch Demo
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-gray-900">10K+</div>
-                <div className="text-gray-600">Active Learners</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-gray-900">500+</div>
-                <div className="text-gray-600">Expert Mentors</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-gray-900">100+</div>
-                <div className="text-gray-600">Courses</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-gray-900">50+</div>
-                <div className="text-gray-600">Weekly Events</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Everything You Need to <span className="text-blue-600">Succeed</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our comprehensive platform combines expert mentorship, structured learning, and practical experience to accelerate your professional growth.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="group relative bg-gray-50 hover:bg-white rounded-2xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-gray-200">
-                <div className={`w-12 h-12 ${feature.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowRight className="w-5 h-5 text-blue-600" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            What Our Learners Say
-          </h2>
-          <p className="text-blue-100 mb-12 text-lg">
-            Join thousands of professionals who have transformed their careers with Neev
-          </p>
-
-          <div className="relative">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl">
-              <div className="flex justify-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              
-              <p className="text-gray-700 text-lg mb-6 italic">
-                "{testimonials[currentTestimonial].content}"
+            <div className={`reveal-animation ${isLoaded ? 'animate-reveal' : ''}`} style={{ animationDelay: '0.4s' }}>
+              <p className="text-2xl md:text-3xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed font-light">
+                Join the <span className="gradient-text font-semibold">world's most exclusive</span> learning ecosystem. 
+                Connect with billionaire mentors, access classified industry intelligence, and transform into an unstoppable force.
               </p>
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className={`reveal-animation flex flex-col md:flex-row items-center justify-center gap-6 mb-16 ${isLoaded ? 'animate-reveal' : ''}`} style={{ animationDelay: '0.6s' }}>
+              <button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 text-white px-12 py-5 rounded-full text-xl font-bold magnetic-button hover:shadow-2xl hover:shadow-purple-500/50 group"
+              onClick={()=> {
+                toast.error("Access not available yet!");
+                navigation.navigate("/signup");
+              }}>
+                <span className="relative z-10 flex items-center">
+                  Access Elite Network
+                  <Rocket className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </button>
               
-              <div className="flex items-center justify-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
-                  {testimonials[currentTestimonial].avatar}
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-gray-900">{testimonials[currentTestimonial].name}</div>
-                  <div className="text-gray-600 text-sm">{testimonials[currentTestimonial].role}</div>
-                </div>
-              </div>
+              <button className="flex items-center text-white border border-white/30 px-12 py-5 rounded-full hover:bg-white hover:text-black transition-all duration-300 group text-xl font-semibold" onClick={()=> toast.error("Demo not available yet!")}>
+                <Play className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+                Experience Demo
+              </button>
             </div>
 
-            <div className="flex justify-center mt-6 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentTestimonial ? 'bg-white' : 'bg-white/50'
-                  }`}
-                />
+            {/* Stats Section */}
+            <div className={`reveal-animation grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto ${isLoaded ? 'animate-reveal' : ''}`} style={{ animationDelay: '0.8s' }}>
+              {stats.map((stat, index) => (
+                <FloatingElement key={index} delay={index * 0.1} duration={4}>
+                  <div className="text-center glass-morphism rounded-3xl p-6 card-hover group">
+                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <stat.icon className="w-8 h-8 text-white" />
+                    </div>
+                    <div className="text-4xl font-black gradient-text mb-2">{stat.value}</div>
+                    <div className="text-gray-400 font-medium">{stat.label}</div>
+                  </div>
+                </FloatingElement>
+              ))}
+            </div>
+
+            {/* Scroll indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+              <ChevronDown className="w-8 h-8 text-white/60" />
+            </div>
+          </div>
+
+          {/* Background geometric shapes */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-1/4 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section ref={featuresRef} id="features" className="py-32 px-6 lg:px-8 relative">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-20">
+              <h2 className="text-5xl md:text-7xl font-black mb-6">
+                <span className="gradient-text">QUANTUM LEAP</span>
+                <br />
+                <span className="text-white">CAPABILITIES</span>
+              </h2>
+              <p className="text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                Our AI-powered ecosystem doesn't just teach—it predicts, adapts, and evolves with your ambitions. 
+                Experience learning that's lightyears ahead of traditional education.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <FloatingElement key={index} delay={feature.delay} duration={5}>
+                  <div className="group relative glass-morphism rounded-3xl p-8 card-hover overflow-hidden border border-white/10">
+                    {/* Gradient background on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                    
+                    <div className={`relative w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                      <feature.icon className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
+                      {feature.title}
+                    </h3>
+                    
+                    <p className="text-gray-400 leading-relaxed text-lg group-hover:text-gray-300 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                    
+                    {/* Hover arrow */}
+                    <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowUpRight className="w-6 h-6 text-blue-400" />
+                    </div>
+                    
+                    {/* Animated border */}
+                    <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-blue-400/50 transition-colors duration-500"></div>
+                  </div>
+                </FloatingElement>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your Career?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Join thousands of learners who are already advancing their careers with expert mentorship and hands-on learning.
-          </p>
+        {/* Testimonials Section */}
+        <section ref={testimonialsRef} className="py-32 px-6 lg:px-8 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 via-purple-900/20 to-teal-900/20"></div>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all duration-300">
-              Start Your Journey Today
-            </button>
-            <button className="border border-gray-600 text-white px-8 py-4 rounded-full hover:bg-white hover:text-gray-900 transition-all duration-300">
-              Explore Courses
-            </button>
-          </div>
+          <div className="max-w-6xl mx-auto text-center relative z-10">
+            <h2 className="text-5xl md:text-7xl font-black mb-6">
+              <span className="text-white">SUCCESS</span>
+              <br />
+              <span className="gradient-text">STORIES</span>
+            </h2>
+            <p className="text-2xl text-gray-400 mb-16 max-w-3xl mx-auto">
+              From Fortune 500 executives to unicorn founders—discover how Neev transforms careers at the highest level.
+            </p>
 
-          <div className="flex items-center justify-center mt-8 text-gray-400">
-            <Clock className="w-4 h-4 mr-2" />
-            <span>Free 7-day trial • No credit card required</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-white py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-white" />
+            <div className="relative">
+              <div className="glass-morphism rounded-3xl p-12 max-w-4xl mx-auto border border-white/10 relative overflow-hidden">
+                {/* Background glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-teal-500/5"></div>
+                
+                <div className="relative z-10">
+                  {/* Rating stars */}
+                  <div className="flex justify-center mb-8">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-8 h-8 text-yellow-400 fill-current mx-1" />
+                    ))}
+                  </div>
+                  
+                  {/* Testimonial content */}
+                  <blockquote className="text-2xl md:text-3xl text-white mb-8 font-light italic leading-relaxed">
+                    "{testimonials[currentTestimonial].content}"
+                  </blockquote>
+                  
+                  {/* Author info */}
+                  <div className="flex items-center justify-center">
+                    <div className="relative">
+                      <div className="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-6">
+                        {testimonials[currentTestimonial].avatar}
+                      </div>
+                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-50 animate-pulse"></div>
+                    </div>
+                    <div className="text-left">
+                      <div className="text-2xl font-bold text-white mb-1">{testimonials[currentTestimonial].name}</div>
+                      <div className="text-gray-400 text-lg">{testimonials[currentTestimonial].role}</div>
+                      <div className="text-blue-400 font-semibold text-lg">{testimonials[currentTestimonial].company}</div>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Neev
+              </div>
+
+              {/* Testimonial indicators */}
+              <div className="flex justify-center mt-8 space-x-3">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial 
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-500 scale-125' 
+                        : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-32 px-6 lg:px-8 relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-black to-gray-900"></div>
+          
+          <div className="max-w-4xl mx-auto text-center relative z-10">
+            <FloatingElement>
+              <div className="inline-flex items-center glass-morphism rounded-full px-6 py-3 mb-8">
+                <Target className="w-5 h-5 text-green-400 mr-3 animate-pulse" />
+                <span className="text-green-300 font-medium">Limited Access • By Invitation Only</span>
+              </div>
+            </FloatingElement>
+
+            <h2 className="text-5xl md:text-7xl font-black mb-8">
+              <span className="text-white">READY TO</span>
+              <br />
+              <span className="gradient-text">DOMINATE?</span>
+            </h2>
+            
+            <p className="text-2xl text-gray-400 mb-12 leading-relaxed">
+              Join the exclusive circle of high-achievers who don't just follow trends—they create them.
+              Your transformation starts with a single click.
+            </p>
+            
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+              <button className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 text-white px-12 py-6 rounded-full text-2xl font-bold magnetic-button hover:shadow-2xl hover:shadow-purple-500/50 group">
+                <span className="relative z-10 flex items-center"
+                onClick={()=> {
+                  toast.error("Access not available yet!");
+                  navigation.navigate("/signup");
+                }}>
+                  Claim Your Spot
+                  <ArrowRight className="ml-3 w-7 h-7 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
-              </div>
-              <p className="text-gray-600 mb-4 max-w-md">
-                Empowering learners worldwide with expert mentorship, comprehensive courses, and practical experience to achieve their career goals.
-              </p>
-              <div className="flex items-center text-gray-500">
-                <Globe className="w-4 h-4 mr-2" />
-                <span>Available worldwide</span>
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </button>
+              
+              <button className="border-2 border-white/30 text-white px-12 py-6 rounded-full hover:bg-white hover:text-black transition-all duration-300 text-2xl font-semibold"
+              onClick={()=> {
+                toast.error("Access not available yet!");
+                navigation.navigate("/signup");
+              }}>
+                Explore Elite Courses
+              </button>
             </div>
 
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Platform</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Courses</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Mentors</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Events</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Competitions</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-blue-600 transition-colors">Terms of Service</a></li>
-              </ul>
+            <div className="flex items-center justify-center text-gray-500 text-lg">
+              <Clock className="w-5 h-5 mr-3" />
+              <span>Exclusive 14-day trial • Zero commitment • Full access</span>
             </div>
           </div>
-
-          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-600">
-            <p>&copy; 2025 Neev. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </section>
+<Footer />
+        
+      </div>
+    </>
   );
 }
