@@ -15,6 +15,7 @@ import {Toaster} from "react-hot-toast"
 import HomePage from "./pages/HomePage";
 import About from "./components/landing/About";
 import ContactMain from "./components/landing/Contact";
+import CoursesPage from "./components/Courses";
 
 export default function App() {
 const location = useLocation();
@@ -43,6 +44,7 @@ if(isCheckingAuth && !authUser){
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactMain />} />
         <Route path="/home" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
+        <Route path="/courses" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
         <Route path="/chat" element={authUser ? <ChatHomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/home" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/home" />} />

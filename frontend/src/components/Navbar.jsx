@@ -57,7 +57,7 @@ export const Navbar = () => {
   };
 
   const moreItems = [
-    { name: 'Courses', icon: BookTextIcon, path: '/courses' },
+    { name: 'Competition', icon: Trophy, path: '/competition' },
     { name: 'Scholarships', icon: Award, path: '/scholarships' },
     { name: 'Cultural Events', icon: IdCard, path: '/cultural-events' },
     { name: 'Workshops', icon: Wrench, path: '/workshops' },
@@ -66,249 +66,190 @@ export const Navbar = () => {
   ];
 
   return (
-    <header className='bg-base-100/95 border-b border-base-300 fixed w-full top-0 z-50 backdrop-blur-lg'>
-      <div className='container mx-auto px-10 h-16'>
-        <div className='flex items-center justify-between h-full'>
-          {/* Logo */}
-          <div className='flex items-center gap-4'>
-            <Link 
-              to='/home' 
-              className='flex items-center gap-2.5 hover:opacity-70 transition-all'
-              onClick={() => handleNavClick('Home')}
-            >
-              <div className='size-12 rounded-lg bg-primary/10 flex items-center justify-center'>
-                <BookOpen className='size-8 text-primary'/>
-              </div>
-              <h1 className='text-lg font-bold'>Neev</h1>
-            </Link>
+    <>
+      {/* Main Navbar */}
+      <div className="navbar bg-base-100 border-b border-base-300 fixed w-full top-0 z-50 backdrop-blur-lg shadow-sm min-h-16">
+        <div className="navbar-start">
+          {/* Mobile dropdown */}
+          <div className="dropdown lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+              <Code className="w-5 h-5" />
+            </div>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 border border-base-300">
+              <li><Link to='/internships' onClick={() => handleNavClick('Internships')} className=""><Briefcase className="w-4 h-4" />Internships</Link></li>
+              <li><Link to='/jobs' onClick={() => handleNavClick('Jobs')} className=""><GraduationCap className="w-4 h-4" />Jobs</Link></li>
+              <li><Link to='/courses' onClick={() => handleNavClick('Courses')} className=""><BookTextIcon className="w-4 h-4" />Courses</Link></li>
+              <li><Link to='/mentors' onClick={() => handleNavClick('Mentors')} className=""><Users className="w-4 h-4" />Mentors</Link></li>
+              <li><Link to='/practice' onClick={() => handleNavClick('Practice')} className=""><Code className="w-4 h-4" />Practice</Link></li>
+              {moreItems.map((item, index) => (
+                <li key={index}>
+                  <Link to={item.path} onClick={() => handleNavClick(item.name)} className="hover:bg-secondary hover:text-secondary-content">
+                    <item.icon className="w-4 h-4" />
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+          
+          {/* Logo */}
+          <Link to='/home' className="btn btn-ghost normal-case text-xl gap-2" onClick={() => handleNavClick('Home')}>
+            <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+              <BookOpen className="w-6 h-6 text-primary" />
+            </div>
+            <span className="hidden sm:inline">Neevv</span>
+          </Link>
+        </div>
 
-          {/* Search Bar */}
-          <div className='flex-1 max-w-md mx-8 hidden md:block'>
-            <form onSubmit={handleSearch} className='relative'>
-              <div className='absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none'>
-                <Search className='size-5 text-base-content/40'/>
-              </div>
+        {/* Center - Search (Desktop only) */}
+        {/* <div className="navbar-center hidden lg:flex">
+          <form onSubmit={handleSearch} className="form-control">
+            <div className="input-group">
+              <span className="bg-base-200 border-base-300">
+                <Search className="w-4 h-4" />
+              </span>
               <input
-                type='text'
-                placeholder='Search courses, jobs...'
+                type="text"
+                placeholder="Search courses, jobs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className='input input-bordered w-full pl-12 pr-4 h-10 bg-base-200/50 focus:bg-base-200 transition-all rounded-full'
+                className="input input-bordered w-80 max-w-xs bg-base-200/50 focus:bg-base-200"
               />
-            </form>
+            </div>
+          </form>
+        </div> */}
+
+        <div className="navbar-end">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center">
+            <Link to='/internships' className="btn btn-ghost btn-sm gap-1 flex-col h-14 " onClick={() => handleNavClick('Internships')}>
+              <Briefcase className="w-4 h-4" />
+              <span className="text-xs">Internships</span>
+            </Link>
+            <Link to='/jobs' className="btn btn-ghost btn-sm gap-1 flex-col h-14 " onClick={() => handleNavClick('Jobs')}>
+              <GraduationCap className="w-4 h-4" />
+              <span className="text-xs">Jobs</span>
+            </Link>
+            <Link to='/courses' className="btn btn-ghost btn-sm gap-1 flex-col h-14 " onClick={() => handleNavClick('Courses')}>
+              <BookTextIcon className="w-4 h-4" />
+              <span className="text-xs">Courses</span>
+            </Link>
+            <Link to='/mentors' className="btn btn-ghost btn-sm gap-1 flex-col h-14 " onClick={() => handleNavClick('Mentors')}>
+              <Users className="w-4 h-4" />
+              <span className="text-xs">Mentors</span>
+            </Link>
+            <Link to='/practice' className="btn btn-ghost btn-sm gap-1 flex-col h-14 " onClick={() => handleNavClick('Practice')}>
+              <Code className="w-4 h-4" />
+              <span className="text-xs">Practice</span>
+            </Link>
+
+            {/* More Dropdown */}
+            <div className="dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-sm gap-1 flex-col h-14 hover:bg-secondary hover:text-secondary-content" onClick={() => setShowMoreDropdown(!showMoreDropdown)}>
+                <MoreHorizontal className="w-4 h-4" />
+                <span className="text-xs">More</span>
+              </div>
+              {showMoreDropdown && (
+                <ul className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow-lg border border-base-300 mt-2">
+                  {moreItems.map((item, index) => (
+                    <li key={index}>
+                      <Link to={item.path} className="gap-3 py-3 hover:bg-secondary hover:text-secondary-content" onClick={() => {
+                        handleNavClick(item.name);
+                        setShowMoreDropdown(false);
+                      }}>
+                        <item.icon className="w-4 h-4" />
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
-          {/* Navigation Items */}
-          <div className='flex items-center gap-2'>
-            {/* Main Nav Items */}
-            <div className='hidden lg:flex items-center gap-4'>
-              <Link
-                to='/internships'
-                className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                onClick={() => handleNavClick('Internships')}
-              >
-                <Briefcase className='Size-5'/>
-                <span className='text-xs'>Internships</span>
-              </Link>
-
-              <Link
-                to='/jobs'
-                className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                onClick={() => handleNavClick('Jobs')}
-              >
-                <GraduationCap className='size-5'/>
-                <span className='text-xs'>Jobs</span>
-              </Link>
-
-              <Link
-                to='/competitions'
-                className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                onClick={() => handleNavClick('Competitions')}
-              >
-                <Trophy className='size-5'/>
-                <span className='text-xs'>Competitions</span>
-              </Link>
-
-              <Link
-                to='/mentors'
-                className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                onClick={() => handleNavClick('Mentors')}
-              >
-                <Users className='size-5'/>
-                <span className='text-xs'>Mentors</span>
-              </Link>
-
-              <Link
-                to='/practice'
-                className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                onClick={() => handleNavClick('Practice')}
-              >
-                <Code className='size-5'/>
-                <span className='text-xs'>Practice</span>
-              </Link>
-
-              {/* More Dropdown */}
-              <div className='dropdown dropdown-end'>
-                <div 
-                  tabIndex={0} 
-                  role='button' 
-                  className='btn btn-ghost btn-sm gap-1 flex-col h-12 min-h-12'
-                  onClick={() => setShowMoreDropdown(!showMoreDropdown)}
-                >
-                  <MoreHorizontal className='size-5'/>
-                  <span className='text-xs'>More</span>
-                </div>
-                {showMoreDropdown && (
-                  <ul className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow-lg border border-base-300 mt-2'>
-                    {moreItems.map((item, index) => (
-                      <li key={index}>
-                        <Link 
-                          to={item.path} 
-                          className='gap-3 py-3'
-                          onClick={() => {
-                            handleNavClick(item.name);
-                            setShowMoreDropdown(false);
-                          }}
-                        >
-                          <item.icon className='size-5'/>
-                          {item.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-
-            {/* Mobile Search */}
-            <button 
-              className='btn btn-ghost btn-sm lg:hidden'
-              onClick={() => toast.info('Mobile search opened')}
-            >
-              <Search className='size-5'/>
-            </button>
-
+          {/* Right side buttons */}
+          <div className="flex items-center lg:gap-8 ml-5">
             {/* Chat */}
-            <Link
-              to='/chat'
-              className='btn btn-ghost btn-sm relative'
-              onClick={() => handleNavClick('Chat')}
-            >
-              <MessageSquare className='w-5 h-5'/>
-              <span className='hidden sm:inline ml-1'>Chat</span>
-              <div className='absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full flex items-center justify-center'>
-                <span className='text-[8px] text-white font-bold'>3</span>
-              </div>
+            <Link to='/chat' className="btn btn-ghost btn-circle relative " onClick={() => handleNavClick('Chat')}>
+              <MessageSquare className="w-5 h-5" />
+              <span className="hidden sm:inline text-sm">Chat</span>
+              <div className="indicator-item badge badge-primary badge-sm absolute -top-1 -right-1">3</div>
             </Link>
 
             {/* Notifications */}
-            <button
-              className='btn btn-ghost btn-sm relative'
-              onClick={() => toast.info('You have 5 new notifications')}
-            >
-              <Bell className='w-5 h-5'/>
-              <span className='hidden sm:inline ml-1'>Notifications</span>
-              <div className='absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center'>
-                <span className='text-[8px] text-white font-bold'>5</span>
-              </div>
+            <button className="btn btn-ghost btn-circle relative" onClick={() => toast.info('You have 5 new notifications')}>
+                <Bell className="w-5 h-5" />
+                <span className="hidden sm:inline text-sm">Notifications</span>
+                <div className="indicator-item badge badge-error badge-sm absolute -top-1 -right-1">5</div>
             </button>
 
             {/* Profile Dropdown */}
             {authUser && (
-              <div className='dropdown dropdown-end'>
-                <div 
-                  tabIndex={0} 
-                  role='button' 
-                  className='btn btn-ghost btn-circle avatar'
-                  onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                >
-                  <div className='w-8 h-8 rounded-full relative'>
-                    <img 
-                      src={authUser.profilePic || "/avatar.png"} 
-                      alt={authUser.fullName}
-                      className='rounded-full object-cover'
-                    />
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" onClick={() => setShowProfileDropdown(!showProfileDropdown)}>
+                  <div className="w-8 h-8 rounded-full relative">
+                    <img src={authUser.profilePic || "/avatar.png"} alt={authUser.fullName} className="rounded-full" />
                     {onlineUsers?.includes(authUser._id) && (
-                      <div className='absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white'></div>
+                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-success rounded-full border-2 border-white"></div>
                     )}
                   </div>
                 </div>
                 
                 {showProfileDropdown && (
-                  <ul className='dropdown-content menu bg-base-100 rounded-box z-[1] w-56 p-2 shadow-lg border border-base-300 mt-2'>
+                  <ul className="dropdown-content menu bg-base-100 rounded-box z-[1] w-56 p-2 shadow-lg border border-base-300 mt-2">
                     {/* User Info */}
-                    <li className='menu-title'>
-                      <div className='flex items-center gap-3 py-2'>
-                        <div className='w-10 h-10 rounded-full relative'>
-                          <img 
-                            src={authUser.profilePic || "/avatar.png"} 
-                            alt={authUser.fullName}
-                            className='rounded-full object-cover'
-                          />
+                    <li className="menu-title">
+                      <div className="flex items-center gap-3 py-2">
+                        <div className="w-10 h-10 rounded-full">
+                          <img src={authUser.profilePic || "/avatar.png"} alt={authUser.fullName} className="rounded-full w-full h-full object-cover" />
                         </div>
                         <div>
-                          <p className='font-medium text-sm'>{authUser.fullName}</p>
-                          <p className='text-xs text-base-content/60'>{authUser.email}</p>
+                          <p className="font-medium text-sm">{authUser.fullName}</p>
+                          <p className="text-xs text-base-content/60">{authUser.email}</p>
                         </div>
                       </div>
                     </li>
                     
-                    <div className='divider my-1'></div>
+                    <div className="divider my-1"></div>
                     
                     <li>
-                      <Link 
-                        to='/profile' 
-                        className='gap-3 py-3'
-                        onClick={() => {
-                          handleNavClick('My Profile');
-                          setShowProfileDropdown(false);
-                        }}
-                      >
-                        <User className='size-5'/>
+                      <Link to='/profile' className="gap-3 py-3 " onClick={() => {
+                        handleNavClick('My Profile');
+                        setShowProfileDropdown(false);
+                      }}>
+                        <User className="w-4 h-4" />
                         My Profile
                       </Link>
                     </li>
                     
                     <li>
-                      <Link 
-                        to='/settings' 
-                        className='gap-3 py-3'
-                        onClick={() => {
-                          handleNavClick('Settings');
-                          setShowProfileDropdown(false);
-                        }}
-                      >
-                        <Settings className='size-5'/>
+                      <Link to='/settings' className="gap-3 py-3 " onClick={() => {
+                        handleNavClick('Settings');
+                        setShowProfileDropdown(false);
+                      }}>
+                        <Settings className="w-4 h-4" />
                         Settings
                       </Link>
                     </li>
                     
                     <li>
-                      <Link 
-                        to='/help' 
-                        className='gap-3 py-3'
-                        onClick={() => {
-                          handleNavClick('Help');
-                          setShowProfileDropdown(false);
-                        }}
-                      >
-                        <HelpCircle className='size-5'/>
+                      <Link to='/help' className="gap-3 py-3 " onClick={() => {
+                        handleNavClick('Help');
+                        setShowProfileDropdown(false);
+                      }}>
+                        <HelpCircle className="w-4 h-4" />
                         Help
                       </Link>
                     </li>
                     
-                    <div className='divider my-1'></div>
+                    <div className="divider my-1"></div>
                     
                     <li>
-                      <button 
-                        className='gap-3 py-3 text-error hover:bg-error/10'
-                        onClick={() => {
-                          handleLogout();
-                          setShowProfileDropdown(false);
-                        }}
-                      >
-                        <LogOut className='size-5'/>
+                      <button className="gap-3 py-3 text-error hover:bg-error hover:text-error-content" onClick={() => {
+                        handleLogout();
+                        setShowProfileDropdown(false);
+                      }}>
+                        <LogOut className="w-4 h-4" />
                         Logout
                       </button>
                     </li>
@@ -320,57 +261,37 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <div className='lg:hidden border-t border-base-300 bg-base-100'>
-        <div className='container mx-auto px-4 py-2'>
-          <div className='flex justify-around'>
-            <Link
-              to='/internships'
-              className='flex flex-col items-center gap-1 p-2 text-xs'
-              onClick={() => handleNavClick('Internships')}
-            >
-              <Briefcase className='size-5'/>
-              Internships
-            </Link>
-            
-            <Link
-              to='/jobs'
-              className='flex flex-col items-center gap-1 p-2 text-xs'
-              onClick={() => handleNavClick('Jobs')}
-            >
-              <GraduationCap className='size-5'/>
-              Jobs
-            </Link>
-            
-            <Link
-              to='/competitions'
-              className='flex flex-col items-center gap-1 p-2 text-xs'
-              onClick={() => handleNavClick('Competitions')}
-            >
-              <Trophy className='size-5'/>
-              Competitions
-            </Link>
-            
-            <Link
-              to='/mentors'
-              className='flex flex-col items-center gap-1 p-2 text-xs'
-              onClick={() => handleNavClick('Mentors')}
-            >
-              <Users className='size-5'/>
-              Mentors
-            </Link>
-            
-            <Link
-              to='/practice'
-              className='flex flex-col items-center gap-1 p-2 text-xs'
-              onClick={() => handleNavClick('Practice')}
-            >
-              <Code className='size-5'/>
-              Practice
-            </Link>
-          </div>
-        </div>
+      {/* Mobile Bottom Navigation */}
+      <div className="btm-nav lg:hidden z-40">
+        <Link to='/internships' className="" onClick={() => handleNavClick('Internships')}>
+          <Briefcase className="w-5 h-5" />
+          <span className="text-xs">Internships</span>
+        </Link>
+        
+        <Link to='/jobs' className="" onClick={() => handleNavClick('Jobs')}>
+          <GraduationCap className="w-5 h-5" />
+          <span className="text-xs">Jobs</span>
+        </Link>
+        
+        <Link to='/courses' className="" onClick={() => handleNavClick('Courses')}>
+          <BookTextIcon className="w-5 h-5" />
+          <span className="text-xs">Courses</span>
+        </Link>
+        
+        <Link to='/mentors' className="" onClick={() => handleNavClick('Mentors')}>
+          <Users className="w-5 h-5" />
+          <span className="text-xs">Mentors</span>
+        </Link>
+        
+        <Link to='/practice' className="" onClick={() => handleNavClick('Practice')}>
+          <Code className="w-5 h-5" />
+          <span className="text-xs">Practice</span>
+        </Link>
       </div>
-    </header>
+
+      {/* Spacers */}
+      <div className="h-16"></div>
+      <div className="h-16 lg:hidden"></div>
+    </>
   );
 };
