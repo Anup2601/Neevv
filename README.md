@@ -1,139 +1,178 @@
-# Neev
 
-## Overview
-This is a real-time chat application built using the MERN (MongoDB, Express.js, React, Node.js) stack with Socket.io for instant messaging. The application allows users to sign up, log in, and chat with others in real time. The chat system is built with modern UI components and efficient state management.
+# 🎓 Neevv – Open-Source EduTech Platform
 
-## Features
-- **User Authentication**: Secure login and signup using JWT authentication.
-- **Real-time Messaging**: Instant message delivery using Socket.io.
-- **Persistent Chat History**: Messages are stored in MongoDB for future access.
-- **Typing Indicators**: See when the other user is typing.
-- **Online/Offline Status**: Display user status in real-time.
-- **Group Chat Support**: Create and manage chat groups.
-- **Notifications**: Get notified when a new message is received.
-- **Dark/Light Mode**: Toggle between different themes.
-- **Mobile Responsive UI**: Built with Tailwind CSS for a seamless experience on all devices.
+Neevv is a **full-stack EdTech platform** designed to make learning smarter, interactive, and accessible.  
+It provides students with engaging learning experiences, interactive tools, and AI-driven insights (future roadmap).  
 
-## Tech Stack
+---
+
+## ✨ Features
+
+- 📚 **Courses & Study Material** – Access curated resources across multiple domains  
+- 🎥 **Interactive Learning** – Live classes, video lectures, and practice sessions  
+- 📝 **Assessments & Quizzes** – Evaluate progress with built-in assessments  
+- 📊 **Student Dashboard** – Track sessions, progress, and achievements  
+- 🤖 **AI-Powered Insights** *(coming soon)* – Personalized learning paths & analytics  
+
+---
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 19** - UI framework for building components.
-- **React Router DOM 7** - Client-side routing for navigation.
-- **Zustand** - Lightweight state management.
-- **Axios** - HTTP client for API requests.
-- **Socket.io-client** - WebSocket communication for real-time chat.
-- **React Hot Toast** - User-friendly notifications.
-- **Tailwind CSS & DaisyUI** - Styling framework for responsive design.
-- **Lucide-react** - Modern icons for UI components.
+- ⚡ React 19 + Vite  
+- 🎨 Tailwind CSS + DaisyUI + Lucide Icons  
+- 🔗 React Router v7  
+- 📡 Axios (API calls)  
+- ✨ Zustand (state management)  
+- 🍞 React Hot Toast  
 
 ### Backend
-- **Node.js** - JavaScript runtime environment.
-- **Express.js** - Web framework for building API routes.
-- **MongoDB & Mongoose** - NoSQL database and ODM for handling data.
-- **Socket.io** - Real-time communication between clients and server.
-- **JWT (JSON Web Token)** - Authentication and authorization system.
-- **Bcrypt.js** - Secure password hashing.
-- **CORS** - Middleware for handling cross-origin requests.
-- **Dotenv** - Environment variable management.
+- 🟢 Node.js + Express 4  
+- 🗄️ MongoDB + Mongoose  
+- 🔐 JWT + bcryptjs (authentication)  
+- ☁️ Cloudinary (file uploads)  
+- ⚡ Socket.IO (real-time communication)  
+- ⚙️ dotenv (environment variables)  
+- 📡 Nodemon (dev)  
+- 🔄 CORS + cookie-parser  
 
-## Installation
+---
 
-### Prerequisites
-Ensure you have the following installed:
-- **Node.js (>= 16.x)**
-- **MongoDB (Local or Atlas)**
-- **Vite (for frontend development)**
+## 🚀 Getting Started
 
-### Backend Setup
-```sh
+### 1. Clone the Repo
+```bash
+git clone https://github.com/Anup2601/Neevv.git
+````
+
+### 2. Setup Backend
+
+```bash
 cd backend
 npm install
-```
-Create a `.env` file in the backend directory and add the following:
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-CLIENT_URL=http://localhost:5173
-```
-Run the backend server:
-```sh
-cd src
-nodemon index.js
-```
-
-### Frontend Setup
-```sh
-cd frontend
-npm install
-```
-Run the frontend server:
-```sh
 npm run dev
 ```
 
-## Usage
-1. Start both frontend and backend servers.
-2. Open `http://localhost:5173` in your browser.
-3. Sign up or log in to start chatting.
-4. Create a new chat or join an existing one.
-5. Enjoy real-time messaging with other users!
+### 3. Setup Frontend
 
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register a new user.
-- `POST /api/auth/login` - Login and get a JWT token.
-- `GET /api/auth/user` - Get authenticated user details.
-
-### Chat
-- `POST /api/chat` - Create a new chat.
-- `GET /api/chat` - Fetch all chats for a user.
-- `GET /api/chat/:id` - Get details of a specific chat.
-
-### Messages
-- `POST /api/messages` - Send a new message.
-- `GET /api/messages/:chatId` - Retrieve messages for a specific chat.
-
-## Folder Structure
-```
-Neev/
-│── backend/
-│   ├── src/
-|   |   ├── controllers/
-|   |   ├── lib/
-│   │   ├── middlewares/
-│   │   ├── models/
-│   │   ├── routes/
-│   ├── index.js
-|   ├── .env
-│   ├── package.json
-│
-│── frontend/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── constants/
-│   │   ├── lib/
-│   │   ├── pages/
-│   │   ├── store/
-│   │   ├── App.js
-│   │   ├── main.jsx
-│   ├── package.json
-│
-│── README.md
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-## Contributing
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a Pull Request.
+---
 
-## License
-This project is licensed under the MIT License.
+## 🔑 Environment Setup
 
-## Contact
-For any queries, feel free to reach out via anupm0873@gmail.com .
+To run **Neevv** locally, you’ll need to set up a `.env` file inside the `backend/` directory.
 
+### Required Keys
+
+```bash
+MONGO_URL=your_mongo_db_connection_string
+PORT=5000
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+JWT_SECRET=your_secret_key
+NODE_ENV=development
+```
+
+### How to Get Your Keys
+
+#### 1️⃣ MongoDB Atlas (Database)
+
+1. [Sign up for MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
+2. Create a **free shared cluster**
+3. Add a **Database User** with username + password
+4. Allow your IP (`0.0.0.0/0` for all IPs)
+5. Copy your **connection string** from *Clusters → Connect → Connect your application*
+6. Replace `<username>` & `<password>` with your credentials
+
+Example:
+
+```bash
+MONGO_URL=mongodb+srv://<username>:<password>@cluster0.abcde.mongodb.net/neevv
+```
+
+#### 2️⃣ Cloudinary (Media Uploads)
+
+1. [Create a free Cloudinary account](https://cloudinary.com/users/register/free)
+2. Go to your **Dashboard**
+3. Copy:
+
+   * `CLOUDINARY_CLOUD_NAME`
+   * `CLOUDINARY_API_KEY`
+   * `CLOUDINARY_API_SECRET`
+
+#### 3️⃣ JWT Secret
+
+* Set any random string, e.g.:
+
+```bash
+JWT_SECRET=mySuperSecretKey123
+```
+
+---
+
+## 🤝 Contributing
+
+We ❤️ contributions!
+Here’s how you can get started:
+
+1. **Fork** the repository
+2. **Create a new branch** (`feature/your-feature-name`)
+3. **Make your changes**
+4. **Commit & Push**
+5. **Open a Pull Request** 🎉
+
+📌 Before contributing, please:
+
+* Check open [Issues](../../issues)
+* Follow project coding standards
+
+---
+
+## 📌 Issues
+
+* Found a bug? 🐛 [Open an issue](../../issues)
+* Have a feature request? 💡 Let us know!
+
+---
+
+## 🌍 Community
+
+* ⭐ Star this repo if you like the project
+* 🗨️ Join discussions in **Issues / PRs**
+* 👥 Collaborate & learn open-source practices
+
+---
+
+## 📸 Screenshots
+
+<img width="1893" alt="screenshot1" src="https://github.com/user-attachments/assets/7cfa8f12-c0b1-422b-909e-b018168df014" />  
+<img width="1897" alt="screenshot2" src="https://github.com/user-attachments/assets/658e854d-48be-44df-ba4d-910d21870922" />  
+<img width="1895" alt="screenshot3" src="https://github.com/user-attachments/assets/e44e3a70-58d0-4904-b8d3-cb359973e5e6" />  
+
+---
+
+## 👨‍💻 Author
+
+**Anup Mishra** – Full Stack Developer
+
+* [GitHub](https://github.com/Anup2601)
+* [LinkedIn](https://www.linkedin.com/in/anup-mishra-263154254/)
+* 📧 [anupm0873@gmail.com](mailto:anupm0873@gmail.com)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
+You are free to use, modify, and distribute with attribution.
+
+---
+
+🚧 **Project Status:** In active development 🚀
+Features and documentation may change frequently.
