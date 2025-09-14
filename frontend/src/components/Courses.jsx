@@ -23,7 +23,7 @@ import {
 
 import ML from "../assets/AI_ML.jpg"
 import Cloud from "../assets/cloud-computing.jpg"
-import Data_Science from "../assets/Data_science.jpg"
+import Data_Science from "../assets/Data_Science.jpg"
 import Security from "../assets/Cyber_Security.jpg"
 import React4 from "../assets/React.jpg"
 import Node from "../assets/node.jpg"
