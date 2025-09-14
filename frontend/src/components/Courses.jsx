@@ -21,6 +21,18 @@ import {
   Search
 } from 'lucide-react';
 
+import ML from "../assets/AI_ML.jpg"
+import Cloud from "../assets/cloud-computing.jpg"
+import Data_Science from "../assets/Data_science.jpg"
+import Security from "../assets/Cyber_Security.jpg"
+import React4 from "../assets/React.jpg"
+import Node from "../assets/node.jpg"
+import UI_UX from "../assets/language_management_mobile.png"
+import JavaScript from "../assets/JavaScript.webp"
+// import Database from "../assets/Data_Analytics.jpg"
+// import C from "../assets/Git.jpg"
+
+
 const CoursesPage = () => {
   const [activeFilters, setActiveFilters] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,19 +40,19 @@ const CoursesPage = () => {
   // Sample course data
   const coursesData = {
     trending: [
-      { id: 1, title: "AI & Machine Learning", category: "ai", students: "45K+", rating: 4.8, image: "/api/placeholder/300/200", instructor: "Dr. Sarah Chen", duration: "12 weeks", level: "Intermediate" },
-      { id: 2, title: "Cloud Computing AWS", category: "cloud", students: "38K+", rating: 4.7, image: "/api/placeholder/300/200", instructor: "Mike Johnson", duration: "8 weeks", level: "Beginner" },
-      { id: 3, title: "Data Science with Python", category: "data", students: "52K+", rating: 4.9, image: "/api/placeholder/300/200", instructor: "Prof. Lisa Wang", duration: "16 weeks", level: "Advanced" },
-      { id: 4, title: "Cybersecurity Fundamentals", category: "security", students: "29K+", rating: 4.6, image: "/api/placeholder/300/200", instructor: "John Smith", duration: "10 weeks", level: "Beginner" }
+      { id: 1, title: "AI & Machine Learning", category: "ai", students: "45K+", rating: 4.8, image: ML, instructor: "Dr. Sarah Chen", duration: "12 weeks", level: "Intermediate" },
+      { id: 2, title: "Cloud Computing AWS", category: "cloud", students: "38K+", rating: 4.7, image: Cloud, instructor: "Mike Johnson", duration: "8 weeks", level: "Beginner" },
+      { id: 3, title: "Data Science with Python", category: "data", students: "52K+", rating: 4.9, image: Data_Science, instructor: "Prof. Lisa Wang", duration: "16 weeks", level: "Advanced" },
+      { id: 4, title: "Cybersecurity Fundamentals", category: "security", students: "29K+", rating: 4.6, image: Security, instructor: "John Smith", duration: "10 weeks", level: "Beginner" },
     ],
     recommended: [
-      { id: 5, title: "React.js Complete Guide", category: "frontend", students: "34K+", rating: 4.8, image: "/api/placeholder/300/200", instructor: "Alex Rivera", duration: "14 weeks", level: "Intermediate" },
-      { id: 6, title: "Node.js Backend Development", category: "backend", students: "28K+", rating: 4.7, image: "/api/placeholder/300/200", instructor: "Emma Brown", duration: "12 weeks", level: "Intermediate" },
-      { id: 7, title: "UI/UX Design Mastery", category: "design", students: "41K+", rating: 4.9, image: "/api/placeholder/300/200", instructor: "David Lee", duration: "10 weeks", level: "Beginner" }
+      { id: 5, title: "React.js Complete Guide", category: "frontend", students: "34K+", rating: 4.8, image: React4, instructor: "Alex Rivera", duration: "14 weeks", level: "Intermediate" },
+      { id: 6, title: "Node.js Backend Development", category: "backend", students: "28K+", rating: 4.7, image: Node, instructor: "Emma Brown", duration: "12 weeks", level: "Intermediate" },
+      { id: 7, title: "UI/UX Design Mastery", category: "design", students: "41K+", rating: 4.9, image: UI_UX, instructor: "David Lee", duration: "10 weeks", level: "Beginner" }
     ],
     continue: [
-      { id: 8, title: "JavaScript Advanced Concepts", progress: 65, category: "javascript", students: "23K+", rating: 4.7, image: "/api/placeholder/300/200", instructor: "Carlos Martinez", duration: "8 weeks", level: "Advanced" },
-      { id: 9, title: "Database Design & SQL", progress: 40, category: "database", students: "31K+", rating: 4.6, image: "/api/placeholder/300/200", instructor: "Rachel Green", duration: "6 weeks", level: "Intermediate" }
+      { id: 8, title: "JavaScript Advanced Concepts", progress: 65, category: "javascript", students: "23K+", rating: 4.7, image: JavaScript, instructor: "Carlos Martinez", duration: "8 weeks", level: "Advanced" },
+      { id: 9, title: "Database Design & SQL", progress: 40, category: "database", students: "31K+", rating: 4.6, image: Database, instructor: "Rachel Green", duration: "6 weeks", level: "Intermediate" }
     ],
     tools: [
       { id: 10, title: "Git & GitHub Mastery", category: "git", students: "67K+", rating: 4.8, image: "/api/placeholder/300/200", instructor: "Tom Wilson", duration: "4 weeks", level: "Beginner" },
@@ -199,7 +211,7 @@ const CoursesPage = () => {
             <div className="form-control">
               <div className="input-group">
                 <span className="bg-base-200">
-                  <Search className="w-5 h-5" />
+                  {/* <Search className="w-5 h-5" /> */}
                 </span>
                 <input
                   type="text"
