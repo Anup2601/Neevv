@@ -1,17 +1,16 @@
+## Neevv is a full-stack Edutech platform designed to make learning smarter, interactive, and accessible.
 
-#Neevv
-
-Neevv is a full-stack AI-powered marketplace and bidding platform.
 It allows users to:
 
-🛒 List items with details and pricing
+📚 Access Courses & Study Material – Explore curated resources across multiple domains.
 
-💸 Place bids in real-time
+🎥 Interactive Learning – Join live classes, video lectures, and practice sessions.
 
-📊 Track active bids with an analytics dashboard
+📝 Assessments & Quizzes – Test knowledge with built-in evaluations and progress tracking.
 
-🤖 Gain AI insights (future feature) for smarter pricing & decision-making
+🤖 AI-Powered Insights (future feature) – Personalized learning paths and performance analysis using AI.
 
+📊 Student Dashboard – Track progress, upcoming sessions, and achievements in one place.
 This project is open-source, and we welcome contributors to help us improve it! 💙
 
 ## Contributing
@@ -94,7 +93,7 @@ Come contribute and make it better! 🚀
 Clone the project
 
 ```bash
-  git clone https://github.com/Anup2601/BID.ai.git
+  git clone https://github.com/Anup2601/Neevv.git
 ```
 
 Go to the backend directory
