@@ -1,139 +1,172 @@
-# Neev
 
-## Overview
-This is a real-time chat application built using the MERN (MongoDB, Express.js, React, Node.js) stack with Socket.io for instant messaging. The application allows users to sign up, log in, and chat with others in real time. The chat system is built with modern UI components and efficient state management.
+#Neevv
 
-## Features
-- **User Authentication**: Secure login and signup using JWT authentication.
-- **Real-time Messaging**: Instant message delivery using Socket.io.
-- **Persistent Chat History**: Messages are stored in MongoDB for future access.
-- **Typing Indicators**: See when the other user is typing.
-- **Online/Offline Status**: Display user status in real-time.
-- **Group Chat Support**: Create and manage chat groups.
-- **Notifications**: Get notified when a new message is received.
-- **Dark/Light Mode**: Toggle between different themes.
-- **Mobile Responsive UI**: Built with Tailwind CSS for a seamless experience on all devices.
+Neevv is a full-stack AI-powered marketplace and bidding platform.
+It allows users to:
+
+🛒 List items with details and pricing
+
+💸 Place bids in real-time
+
+📊 Track active bids with an analytics dashboard
+
+🤖 Gain AI insights (future feature) for smarter pricing & decision-making
+
+This project is open-source, and we welcome contributors to help us improve it! 💙
+
+## Contributing
+
+We ❤️ contributions! Here’s how you can help:
+
+Fork the repo
+
+Create a new branch (feature/your-feature-name)
+
+Make your changes
+
+Commit & push
+
+Open a Pull Request 🎉
+
+## 📌 Issues
+
+Found a bug? 🐛
+
+Have a feature request? 💡
+
+👉 Open an issue
+ and let us know!
+ 
+ ## 🌍 Community
+
+⭐ Star this repo if you like the project
+
+🗨️ Join discussions in Issues / PRs
+
+👥 Collaborate & learn open-source practices
+
+## 📜 License
+
+This project is licensed under the MIT License.
+You are free to use, modify, and distribute with attribution.
+
+✨ With Neevv, we’re building a smart, modern, open-source Edu-Tech platform.
+Come contribute and make it better! 🚀
+
+# Hi, I'm Anup Mishra! 👋
+
+
+## 🚀 About Me
+"Hello, I'm full stack developer, a passionate Computer Science.
+## Authors
+
+- [@Anup2601](https://github.com/Anup2601)
+
+
+## 🔗 Links
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/anup-mishra-263154254/)
+
+
 
 ## Tech Stack
 
-### Frontend
-- **React 19** - UI framework for building components.
-- **React Router DOM 7** - Client-side routing for navigation.
-- **Zustand** - Lightweight state management.
-- **Axios** - HTTP client for API requests.
-- **Socket.io-client** - WebSocket communication for real-time chat.
-- **React Hot Toast** - User-friendly notifications.
-- **Tailwind CSS & DaisyUI** - Styling framework for responsive design.
-- **Lucide-react** - Modern icons for UI components.
+**Frontend:**
+⚡ React 19 + Vite
+🎨 Tailwind CSS + DaisyUI + Lucide Icons
+✨ Zustand for state management
+📡 Axios for API calls
+🔗 React Router v7
+🍞 React Hot Toast
 
-### Backend
-- **Node.js** - JavaScript runtime environment.
-- **Express.js** - Web framework for building API routes.
-- **MongoDB & Mongoose** - NoSQL database and ODM for handling data.
-- **Socket.io** - Real-time communication between clients and server.
-- **JWT (JSON Web Token)** - Authentication and authorization system.
-- **Bcrypt.js** - Secure password hashing.
-- **CORS** - Middleware for handling cross-origin requests.
-- **Dotenv** - Environment variable management.
+**Backend:**
+🟢 Node.js + Express 4
+🗄️ MongoDB + Mongoose
+🔐 JWT + bcryptjs for authentication
+☁️ Cloudinary for file uploads
+🔄 CORS + cookie-parser
+⚡ Socket.IO for real-time communication
+⚙️ dotenv for environment variables
+📡 Nodemon (dev)
 
-## Installation
+## Run Locally
 
-### Prerequisites
-Ensure you have the following installed:
-- **Node.js (>= 16.x)**
-- **MongoDB (Local or Atlas)**
-- **Vite (for frontend development)**
+Clone the project
 
-### Backend Setup
-```sh
-cd backend
-npm install
+```bash
+  git clone https://github.com/Anup2601/BID.ai.git
 ```
-Create a `.env` file in the backend directory and add the following:
+
+Go to the backend directory
+
+```bash
+  cd backend
 ```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the backend
+
+```bash
+  npm run dev
+```
+
+Go to the frontend directory
+
+```bash
+  cd frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the frontend
+
+```bash
+  npm run dev
+```
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your backend .env file
+
+```bash
+MONGO_URL=your_mongo_db_connection_string
+```
+```bash
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-CLIENT_URL=http://localhost:5173
 ```
-Run the backend server:
-```sh
-cd src
-nodemon index.js
+```bash
+CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
 ```
-
-### Frontend Setup
-```sh
-cd frontend
-npm install
+```bash
+CLOUDINARY_API_KEY=your_cloudinary_api_key
 ```
-Run the frontend server:
-```sh
-npm run dev
+```bash
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+```
+```bash
+JWT_SECRET=mysecretkey
+```
+```bash
+ NODE_ENV=development
 ```
 
-## Usage
-1. Start both frontend and backend servers.
-2. Open `http://localhost:5173` in your browser.
-3. Sign up or log in to start chatting.
-4. Create a new chat or join an existing one.
-5. Enjoy real-time messaging with other users!
+## Feedback
+If you have any feedback, please reach out to us at anupm0873@gmail.com
+## Screenshots
+<img width="1893" height="906" alt="image" src="https://github.com/user-attachments/assets/7cfa8f12-c0b1-422b-909e-b018168df014" />
+<img width="1897" height="915" alt="image" src="https://github.com/user-attachments/assets/658e854d-48be-44df-ba4d-910d21870922" />
+<img width="1895" height="915" alt="image" src="https://github.com/user-attachments/assets/e44e3a70-58d0-4904-b8d3-cb359973e5e6" />
 
-## API Endpoints
 
-### Authentication
-- `POST /api/auth/register` - Register a new user.
-- `POST /api/auth/login` - Login and get a JWT token.
-- `GET /api/auth/user` - Get authenticated user details.
-
-### Chat
-- `POST /api/chat` - Create a new chat.
-- `GET /api/chat` - Fetch all chats for a user.
-- `GET /api/chat/:id` - Get details of a specific chat.
-
-### Messages
-- `POST /api/messages` - Send a new message.
-- `GET /api/messages/:chatId` - Retrieve messages for a specific chat.
-
-## Folder Structure
-```
-Neev/
-│── backend/
-│   ├── src/
-|   |   ├── controllers/
-|   |   ├── lib/
-│   │   ├── middlewares/
-│   │   ├── models/
-│   │   ├── routes/
-│   ├── index.js
-|   ├── .env
-│   ├── package.json
-│
-│── frontend/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── constants/
-│   │   ├── lib/
-│   │   ├── pages/
-│   │   ├── store/
-│   │   ├── App.js
-│   │   ├── main.jsx
-│   ├── package.json
-│
-│── README.md
-```
-
-## Contributing
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a Pull Request.
-
-## License
-This project is licensed under the MIT License.
-
-## Contact
-For any queries, feel free to reach out via anupm0873@gmail.com .
-
+🚧 Status
+This project is in active development and not yet complete. Features and documentation may change.
