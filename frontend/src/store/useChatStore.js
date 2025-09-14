@@ -59,20 +59,71 @@ export const useChatStore = create((set,get) => ({
     }
   },
 
-  subscribeToMessages: () => {
-    const { selectedUser } = get();
-    if (!selectedUser) {
-      console.error("❌ Error: No selected user to subscribe to messages");
-      return;
-    }
-    const socket =useAuthStore.getState().socket;
+  // subscribeToMessages: () => {
+  //   const { selectedUser } = get();
+  //   if (!selectedUser) {
+  //     console.error("❌ Error: No selected user to subscribe to messages");
+  //     return;
+  //   }
+  //   const socket =useAuthStore.getState().socket;
 
-    socket.on("newMessage", (newMessage) => {
-      const isMessageSentBySelectedUser = newMessage.senderId === selectedUser._id;
-      if (!isMessageSentBySelectedUser) return;
-      set({ messages: [...get().messages, newMessage] });
-    });
-  },
+  //   socket.on("newMessage", (newMessage) => {
+  //     const isMessageSentBySelectedUser = newMessage.senderId === selectedUser._id;
+  //     if (!isMessageSentBySelectedUser) return;
+  //     set({ messages: [...get().messages, newMessage] });
+  //   });
+  // },
+
+  subscribeToMessages: () => {
+  const socket = useAuthStore.getState().socket;
+
+  if (!socket) {
+    console.error("❌ Socket not initialized");
+    return;
+  }
+
+  socket.on("newMessage", (newMessage) => {
+    const { messages, users, selectedUser } = get();
+
+    const isCurrentChat = selectedUser?._id === newMessage.senderId;
+
+    const sender = users.find((u) => u._id === newMessage.senderId);
+
+    if (isCurrentChat) {
+      // 👥 User is chatting with sender → add message to chat
+      set({ messages: [...messages, newMessage] });
+      // ⿢ Show toast (optional)
+    toast.success(`📨 New message from ${sender?.fullName || "someone"}`);
+
+    // 🔔 Show browser notification
+    if (Notification.permission === "granted") {
+      new Notification(`📨 New message from ${sender?.fullName || "someone"}`);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification(`📨 New message from ${sender?.fullName || "someone"}`);
+        }
+      });
+    }
+
+    
+    } else {
+      // 👤 User is not chatting with sender → show notification only
+      toast.success(`📨 New message from ${sender?.fullName || "someone"}`);
+
+      if (Notification.permission === "granted") {
+        new Notification(`📨 New message from ${sender?.fullName || "someone"}`);
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            new Notification(`📨 New message from ${sender?.fullName || "someone"}`);
+          }
+        });
+      }
+    }
+  });
+},
+
 
   unsubscribeToMessages: () => {
     const socket = useAuthStore.getState().socket;
