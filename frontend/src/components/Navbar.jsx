@@ -23,7 +23,9 @@ import {
   BookTextIcon,
   IdCard,
   TicketCheck,
-  FilePenLine
+  FilePenLine,
+  MenuSquare,
+  Menu
 } from 'lucide-react';
 
 export const Navbar = () => {
@@ -73,7 +75,7 @@ export const Navbar = () => {
           {/* Mobile dropdown */}
           <div className="dropdown lg:hidden">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-              <Code className="w-5 h-5" />
+              <Menu className="w-5 h-5" />
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52 border border-base-300">
               <li><Link to='/internships' onClick={() => handleNavClick('Internships')} className=""><Briefcase className="w-4 h-4" />Internships</Link></li>

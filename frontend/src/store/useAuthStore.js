@@ -69,6 +69,8 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
+ 
+
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {
@@ -106,7 +108,7 @@ export const useAuthStore = create((set, get) => ({
     if (socket) {
       socket.disconnect();
       set({ socket: null, onlineUsers: [] });
-      console.log("Socket disconnected");
+      // console.log("Socket disconnected");
     }
   },
 }));
