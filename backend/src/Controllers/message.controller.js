@@ -1,7 +1,7 @@
 import { mongoose } from "mongoose";
 import cloudinary from "../lib/cloudinary.js";
-import Message from "../Models/message.model.js";
-import User from "../Models/user.model.js";
+import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
 import { getReceiverSocket, io } from "../lib/socket.js";
 
 export const getUsersForSlidebar = async(req,res) =>{
