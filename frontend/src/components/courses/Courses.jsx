@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   BookOpen, 
   Code, 
@@ -21,21 +22,31 @@ import {
   Search
 } from 'lucide-react';
 
-import ML from "../assets/AI_ML.jpg"
-import Cloud from "../assets/cloud-computing.jpg"
-import Data_Science from "../assets/Data_Science.jpg"
-import Security from "../assets/Cyber_Security.jpg"
-import React4 from "../assets/react.jpg"
-import Node from "../assets/node.jpg"
-import UI_UX from "../assets/language_management_mobile.png"
-import JavaScript from "../assets/JavaScript.webp"
+import ML from "../../assets/AI_ML.jpg"
+import Cloud from "../../assets/cloud-computing.jpg"
+import Data_Science from "../../assets/Data_Science.jpg"
+import Security from "../../assets/Cyber_Security.jpg"
+import React4 from "../../assets/react.jpg"
+import Node from "../../assets/node.jpg"
+import UI_UX from "../../assets/language_management_mobile.png"
+import JavaScript from "../../assets/JavaScript.webp"
 // import Database from "../assets/Data_Analytics.jpg"
 // import C from "../assets/Git.jpg"
 
 
+
 const CoursesPage = () => {
+  const navigate = useNavigate();
   const [activeFilters, setActiveFilters] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    navigate(`/courses-list/${searchQuery}`);
+  };
+
+
 
   // Sample course data
   const coursesData = {
@@ -209,19 +220,23 @@ const CoursesPage = () => {
               <p className="text-base-content/70 text-lg">Discover your next skill with our comprehensive course catalog</p>
             </div>
             <div className="form-control">
-              <div className="input-group">
-                <span className="bg-base-200">
-                  {/* <Search className="w-5 h-5" /> */}
-                </span>
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  className="input input-bordered w-full max-w-xs"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Search courses..."
+                className="input input-bordered w-full max-w-xs"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSearch(e)}
+              />
+              {/* <button 
+                className="btn btn-square btn-primary" 
+                onClick={handleSearch}
+              >
+                <Search className="w-5 h-5" />
+              </button> */}
             </div>
+          </div>
           </div>
         </div>
       </div>

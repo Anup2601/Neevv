@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import {
   BookOpen,
   Search,
@@ -28,20 +29,25 @@ import {
   MapPin,
   Heart
 } from 'lucide-react';
+import { Companies } from '../components/Companies';
 
-const HomePage = () => {
+const HomePage = ({data}) => {
   const { authUser } = useAuthStore();
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(data ? data : '');
+
+ 
+  const navigate = useNavigate();
 
   const handleNavClick = (item) => {
     toast.success(`Exploring ${item}`, {
-      duration: 2000,
+      duration: 1000,
     });
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
+      navigate(`/${searchQuery}`);
       toast.success(`Searching for: ${searchQuery}`, {
         duration: 2000,
       });
@@ -139,7 +145,7 @@ const HomePage = () => {
     <div className="relative z-30 lg:pt-20 pb-12 min-w-10">
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 text-center">
+      <section className="container mx-auto px-4 pt-6 text-center">
         <div className="max-w-10xl mx-auto space-y-8">
           {/* Welcome Message */}
           <div className="space-y-4">
@@ -190,6 +196,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      <Companies/>
 
       {/* Featured Sections */}
       <section className="container mx-auto px-4 py-12">

@@ -10,13 +10,22 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { useThemeStore } from "./store/useThemeStore";
 import { useEffect } from "react";
-import {Heading3, Loader} from "lucide-react";
+import { Loader2} from "lucide-react";
 import {Toaster} from "react-hot-toast"
 import HomePage from "./pages/HomePage";
 import About from "./components/landing/About";
 import ContactMain from "./components/landing/Contact";
-import CoursesPage from "./components/Courses";
+import CoursesPage from "./components/courses/Courses";
 import PaymentPage from "./components/Payment";
+import CourseDetailPage from "./components/courses/CoursesDetail";
+import Loader from "./components/Loader";
+import MyEnrollments from "./components/courses/MyEnrollments";
+import Player from "./components/courses/Player";
+import Educator from "./components/educator/Educator";
+import Dashboard from "./components/educator/Dashboard";
+import AddCourse from "./components/educator/AddCourse";
+import MyCourses from "./components/educator/MyCourses";
+import StudentsEnrolled from "./components/educator/StudentsEnrolled";
 
 export default function App() {
 const location = useLocation();
@@ -29,11 +38,7 @@ useEffect(()=>{
 console.log(authUser);
 
 if(isCheckingAuth && !authUser){
-  return(
-    <div className="flex items-center justify-center h-screen">
-      <Loader className="size-10 animate-spin "/>
-    </div>
-  )
+  return <Loader />
 }
 
   return (
@@ -44,14 +49,32 @@ if(isCheckingAuth && !authUser){
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactMain />} />
+
         <Route path="/home" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/courses" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
+        <Route path="/courses-list/:input" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
+        {/* <Route path="/courses/:id" element={authUser ? <CourseDetailPage/> : <Navigate to="/login" />} /> */}
+        <Route path="/my-enrollments" element={authUser ? <MyEnrollments /> : <Navigate to="/login" />} />
+        <Route path="/player/:courseId" element={authUser ? <Player /> : <Navigate to="/login" />} />
+        <Route path="/loading/:path" element={<Loader />} />
+
         <Route path="/chat" element={authUser ? <ChatHomePage /> : <Navigate to="/login" />} />
+
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/home" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/home" />} />
+
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+
         <Route path="/payment" element={authUser ? <PaymentPage /> : <Navigate to="/login" />} />
+
+        <Route path="/educator" element={authUser ? <Educator /> : <Navigate to="/login" />} >
+          <Route path="dashboard" element={<Dashboard/>} />
+          <Route path="add-course" element={<AddCourse/>} />
+          <Route path="my-courses" element={<MyCourses/>} />
+          <Route path="student-enrolled" element={<StudentsEnrolled/>} />
+        </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 
