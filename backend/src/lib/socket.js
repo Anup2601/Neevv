@@ -20,7 +20,7 @@ export function getReceiverSocket(userId){
 const useSocketMap={};
 
 io.on("connection",(socket)=>{
-    console.log("User connected", socket.id);
+    // console.log("User connected", socket.id);
    
     const userId=socket.handshake.query.userId;
     if(userId){
@@ -28,16 +28,16 @@ io.on("connection",(socket)=>{
         io.emit("getOnlineUsers",Object.keys(useSocketMap));
     }
     socket.on("disconnect",()=>{
-        console.log("User disconnected",socket.id);
+        // console.log("User disconnected",socket.id);
         delete useSocketMap[userId];
         io.emit("getOnlineUsers",Object.keys(useSocketMap));
     });
 });
 
 io.on("connection",(socket)=>{
-    console.log("User connected", socket.id);
+    // console.log("User connected", socket.id);
     socket.on("disconnect",()=>{
-        console.log("User disconnected",socket.id);
+        // console.log("User disconnected",socket.id);
     });
 });
 

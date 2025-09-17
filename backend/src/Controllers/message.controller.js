@@ -6,8 +6,8 @@ import { getReceiverSocket, io } from "../lib/socket.js";
 
 export const getUsersForSlidebar = async(req,res) =>{
     try {
-        console.log("🔹 Requesting Users for Sidebar...");
-        console.log("🔍 Logged-in User ID:", req.user?._id);
+        // console.log("🔹 Requesting Users for Sidebar...");
+        // console.log("🔍 Logged-in User ID:", req.user?._id);
 
         if (!req.user) {
             console.warn("⚠️ req.user is undefined!");
@@ -26,7 +26,7 @@ export const getUsersForSlidebar = async(req,res) =>{
 export const getMessages =async(req,res)=>{
     try {
         const {id:userToChatId}=req.params;
-        console.log("Received user ID:", userToChatId);
+        // console.log("Received user ID:", userToChatId);
         const myId= req.user._id;
         if(!mongoose.Types.ObjectId.isValid(userToChatId)){
             return res.status(400).json({message:"Invalid User ID"});

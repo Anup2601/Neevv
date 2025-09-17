@@ -16,6 +16,7 @@ import HomePage from "./pages/HomePage";
 import About from "./components/landing/About";
 import ContactMain from "./components/landing/Contact";
 import CoursesPage from "./components/Courses";
+import PaymentPage from "./components/Payment";
 
 export default function App() {
 const location = useLocation();
@@ -50,6 +51,7 @@ if(isCheckingAuth && !authUser){
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/home" />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route path="/payment" element={authUser ? <PaymentPage /> : <Navigate to="/login" />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
 

@@ -10,11 +10,6 @@ const __dirname = path.dirname(__filename);
 // Load .env manually
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-console.log("🔍 Checking .env values:");
-console.log("✅ CLOUDINARY_CLOUD_NAME:", process.env.CLOUDINARY_CLOUD_NAME || "Not Found");
-console.log("✅ CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY || "Not Found");
-console.log("✅ CLOUDINARY_API_SECRET:", process.env.CLOUDINARY_API_SECRET ? "Exists" : "Not Found");
-
 // cloudinary.config({
 //   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
 //   api_key: process.env.CLOUDINARY_API_KEY,
