@@ -25,6 +25,8 @@ jobs:
       CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       NODE_ENV: test
+      GOOGLE_CLIENT_ID : ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET : ${{ secrets.GOOGLE_CLIENT_SECRET }} 
 
     steps:
       # 1. Checkout repo
