@@ -15,9 +15,9 @@ import {Toaster} from "react-hot-toast"
 import HomePage from "./pages/HomePage";
 import About from "./components/landing/About";
 import ContactMain from "./components/landing/Contact";
-import CoursesPage from "./components/courses/Courses";
+import CoursesPage from "./pages/CoursesPage";
 import PaymentPage from "./components/Payment";
-import CourseDetailPage from "./components/courses/CoursesDetail";
+import CourseDetailPage from "./pages/CourseDetailPage";
 import Loader from "./components/Loader";
 import MyEnrollments from "./components/courses/MyEnrollments";
 import Player from "./components/courses/Player";
@@ -26,6 +26,7 @@ import Dashboard from "./components/educator/Dashboard";
 import AddCourse from "./components/educator/AddCourse";
 import MyCourses from "./components/educator/MyCourses";
 import StudentsEnrolled from "./components/educator/StudentsEnrolled";
+import coursesData from "./data/coursesData";
 
 export default function App() {
 const location = useLocation();
@@ -52,8 +53,7 @@ if(isCheckingAuth && !authUser){
 
         <Route path="/home" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/courses" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
-        <Route path="/courses-list/:input" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
-        {/* <Route path="/courses/:id" element={authUser ? <CourseDetailPage/> : <Navigate to="/login" />} /> */}
+        <Route path="/courses/:id" element={authUser ? <CourseDetailPage courses={coursesData} /> : <Navigate to="/login" />} />
         <Route path="/my-enrollments" element={authUser ? <MyEnrollments /> : <Navigate to="/login" />} />
         <Route path="/player/:courseId" element={authUser ? <Player /> : <Navigate to="/login" />} />
         <Route path="/loading/:path" element={<Loader />} />
