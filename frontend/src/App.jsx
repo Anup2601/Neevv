@@ -55,7 +55,7 @@ if(isCheckingAuth && !authUser){
         <Route path="/courses" element={authUser ? <CoursesPage /> : <Navigate to="/login" />} />
         <Route path="/courses/:id" element={authUser ? <CourseDetailPage courses={coursesData} /> : <Navigate to="/login" />} />
         <Route path="/my-enrollments" element={authUser ? <MyEnrollments courses={coursesData} /> : <Navigate to="/login" />} />
-        <Route path="/player/:courseId" element={authUser ? <Player /> : <Navigate to="/login" />} />
+        <Route path="/player/:courseId" element={authUser ? <Player courses={coursesData} /> : <Navigate to="/login" />} />
         <Route path="/loading/:path" element={<Loader />} />
 
         <Route path="/chat" element={authUser ? <ChatHomePage /> : <Navigate to="/login" />} />
