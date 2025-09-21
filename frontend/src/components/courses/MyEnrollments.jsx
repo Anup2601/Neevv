@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import coursesData from "../../data/coursesData"; 
-import humanizeDuration from "humanize-duration";
+import { calculateCourseTime } from "../../utils/courseUtils";
+import { useNavigate } from "react-router-dom";
+import {Line} from "rc-progress";
 
 const MyEnrollments = () => {
-  const calculateCourseTime = (course) => {
-    let time = 0;
-    course.courseContent.forEach((ch) =>
-      ch.chapterContent.forEach((lecture) => (time += lecture.lectureDuration))
-    );
-    return humanizeDuration(time * 60 * 1000, {
-      units: ["h", "m"],
-      round: true,
-      spacer: "",
-    });
-  };
+
+  const navigate = useNavigate();
+  const [progressArray, setProgressArray]= useState([
+    {lectureCompleted:3, totalLectures:6},
+    {lectureCompleted:4, totalLectures:6},
+    {lectureCompleted:2, totalLectures:6},
+    {lectureCompleted:0, totalLectures:6},
+    {lectureCompleted:6, totalLectures:6},
+    {lectureCompleted:2, totalLectures:6},
+    {lectureCompleted:1, totalLectures:6},
+    {lectureCompleted:3, totalLectures:6},
+  ])
 
   // Example enrolled courses
   const [enrolledIds] = useState([1, 3, 5, 7, 8, 9]); 
@@ -49,15 +52,18 @@ const MyEnrollments = () => {
                       alt={course.title}
                       className="w-16 sm:w-20 md:w-24 rounded-lg shadow"
                     />
-                    <p className="font-medium">{course.title}</p>
+                    <div className="flex-1">
+                      <p className="font-medium">{course.title}</p>
+                    <Line strokeWidth={2} percent={progressArray[index] ? (progressArray[index].lectureCompleted*100)/progressArray[index].totalLectures :0} className="rounded-full"/>
+                    </div>
                   </td>
                   <td className="px-4 py-3">{calculateCourseTime(course) || "N/A"}</td>
                   <td className="px-4 py-3">
-                    {course.completedLectures || 0}/{course.totalLectures || 0} Lectures
+                    {progressArray[index] && `${progressArray[index].lectureCompleted}/ ${progressArray[index].totalLectures}`} Lectures
                   </td>
                   <td className="px-4 py-3">
-                    <button className="btn btn-xs sm:btn-sm md:btn-md btn-primary">
-                      {course.status || "On Going"}
+                    <button className="btn btn-xs sm:btn-sm md:btn-md btn-primary" onClick={()=>navigate(`/player/${course.id}`)}>
+                      {progressArray[index] && progressArray[index].lectureCompleted / progressArray[index].totalLectures===1 ? 'Completed' : "On Going"}
                     </button>
                   </td>
                 </tr>
@@ -85,15 +91,18 @@ const MyEnrollments = () => {
               />
             </figure>
             <div className="card-body p-4">
-              <h2 className="card-title text-base sm:text-lg">{course.title}</h2>
-              <p className="text-sm text-gray-600">
+              <div className="flex-1">
+                      <p className="font-medium">{course.title}</p>
+                    <Line strokeWidth={2} percent={progressArray[index] ? (progressArray[index].lectureCompleted*100)/progressArray[index].totalLectures :0} className="rounded-full pt-4 m-2"/>
+                    </div>
+              <p className="text-sm ">
                 Duration: {calculateCourseTime(course) || "N/A"}
               </p>
-              <p className="text-sm text-gray-600">
-                Completed: {course.completedLectures || 0}/{course.totalLectures || 0} Lectures
+              <p className="text-sm ">
+                Completed: {progressArray[index] && `${progressArray[index].lectureCompleted}/ ${progressArray[index].totalLectures}`} Lectures
               </p>
               <div className="card-actions mt-2">
-                <button className="btn btn-primary btn-sm w-full">{course.status || "On Going"}</button>
+                <button className="btn btn-primary btn-sm w-full" onClick={()=>navigate(`/player/${course.id}`)}>{progressArray[index] && progressArray[index].lectureCompleted / progressArray[index].totalLectures===1 ? 'Completed' : "On Going"}</button>
               </div>
             </div>
           </div>

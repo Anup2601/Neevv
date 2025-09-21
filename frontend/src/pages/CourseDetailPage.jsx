@@ -9,7 +9,7 @@ import CourseContent from "../components/courses/CourseDetailContent";
 import CourseDescription from "../components/courses/CourseDetailDescription";
 import CoursePlayer from "../components/courses/CourseDetailPlayer";
 import CourseSidebar from "../components/courses/CourseDetailSidebar";
-
+import { calculateCourseTime } from "../utils/courseUtils";
 import humanizeDuration from "humanize-duration";
 
 const CourseDetailPage = ({ courses, user }) => {
@@ -87,18 +87,6 @@ const CourseDetailPage = ({ courses, user }) => {
     });
   };
 
-  const calculateCourseTime = (course) => {
-    let time = 0;
-    course.courseContent.forEach((ch) =>
-      ch.chapterContent.forEach((lecture) => (time += lecture.lectureDuration))
-    );
-    return humanizeDuration(time * 60 * 1000, {
-      units: ["h", "m"],
-      round: true,
-      spacer: "",
-    });
-  };
-
   const calculateNoOfLectures = (course) => {
     let totalLectures = 0;
     course.courseContent.forEach((ch) => {
@@ -129,7 +117,6 @@ const CourseDetailPage = ({ courses, user }) => {
         <CourseSidebar
           course={course}
           calculateRating={calculateRating}
-          calculateCourseTime={calculateCourseTime}
           calculateNoOfLectures={calculateNoOfLectures}
           handlePayment={handlePayment}
           isAlreadyEnrolled={isAlreadyEnrolled}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Star, Clock, Users } from "lucide-react";
+import { calculateCourseTime } from "../../utils/courseUtils";
 
 const getLevelStyles = (level) => {
   switch (level) {
@@ -46,24 +47,10 @@ const CourseCard = ({ course, showProgress = false }) => (
         by {course.instructor}
       </p>
 
-      {showProgress && (
-        <div className="mb-3">
-          <div className="flex justify-between text-sm mb-1">
-            <span>Progress</span>
-            <span>{course.progress}%</span>
-          </div>
-          <progress
-            className="progress progress-primary w-full"
-            value={course.progress}
-            max="100"
-          ></progress>
-        </div>
-      )}
-
       <div className="flex items-center gap-4 text-sm text-base-content/60 mb-3">
         <div className="flex items-center gap-1">
           <Clock className="w-4 h-4" />
-          {course.duration}
+          {calculateCourseTime(course)}
         </div>
         <div className="flex items-center gap-1">
           <Users className="w-4 h-4" />

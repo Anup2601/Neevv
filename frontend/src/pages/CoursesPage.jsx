@@ -11,8 +11,7 @@ import FilterSection from "../components/courses/FilterSection";
 
 const sectionsConfig = [
   { key: "trending", title: "Trending Domains", subtitle: "Most popular courses right now", icon: TrendingUp },
-  { key: "recommended", title: "Recommended Courses for You", subtitle: "Based on your interests and activity", icon: Star },
-  { key: "continue", title: "Continue Where You Left Off", subtitle: "Pick up where you stopped", icon: Play, showProgress: true },
+  { key: "recommended", title: "Recommended Courses for You", subtitle: "Based on your interests and activity", icon: Star }, 
   { key: "tools", title: "Software Tools", subtitle: "Master the tools that power modern development", icon: Zap },
   { key: "coding", title: "Coding", subtitle: "Programming languages and frameworks", icon: Code },
   { key: "aptitude", title: "Aptitude", subtitle: "Sharpen your problem-solving skills", icon: Calculator },

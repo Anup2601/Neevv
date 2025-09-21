@@ -1,10 +1,10 @@
 import React from "react";
 import { Star, Timer, BookOpen } from "lucide-react";
+import { calculateCourseTime } from "../../utils/courseUtils";
 
 const CourseDetailSidebar = ({
   course,
   calculateRating,
-  calculateCourseTime,
   calculateNoOfLectures,
   handlePayment,
   isAlreadyEnrolled,
