@@ -21,12 +21,12 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import Loader from "./components/Loader";
 import MyEnrollments from "./components/courses/MyEnrollments";
 import Player from "./components/courses/Player";
-import Educator from "./components/educator/Educator";
-import Dashboard from "./components/educator/Dashboard";
-import AddCourse from "./components/educator/AddCourse";
-import MyCourses from "./components/educator/MyCourses";
-import StudentsEnrolled from "./components/educator/StudentsEnrolled";
 import coursesData from "./data/coursesData";
+import Educator from "./pages/educator/Educator";
+import Dashboard from "./pages/educator/Dashboard";
+import AddCourse from "./pages/educator/AddCourse";
+import StudentsEnrolled from "./pages/educator/StudentsEnrolled";
+import MyCourses from "./pages/educator/MyCourses";
 
 export default function App() {
 const location = useLocation();
@@ -70,7 +70,7 @@ if(isCheckingAuth && !authUser){
 
         <Route path="/educator" element={authUser ? <Educator /> : <Navigate to="/login" />} >
           <Route path="dashboard" element={<Dashboard/>} />
-          <Route path="add-course" element={<AddCourse/>} />
+          <Route path="add-courses" element={<AddCourse/>} />
           <Route path="my-courses" element={<MyCourses/>} />
           <Route path="student-enrolled" element={<StudentsEnrolled/>} />
         </Route>
