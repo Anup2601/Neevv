@@ -1,35 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Pause, Play } from "lucide-react";
-import humanizeDuration from "humanize-duration"; 
+import humanizeDuration from "humanize-duration";
 import Rating from "./Rating";
+import coursesData from "../../data/coursesData";
 
-const Player = ({courses}) => {
-   const { id } = useParams();
+const Player = () => {
+  const { id } = useParams();
 
-   const course = Object.values(courses ?? {})
-    .flat()
-    .find((c) => c.id === Number(id));
-
-   
-
+  const allCourses = Object.values(coursesData).flat();
+  const course = allCourses.find((c) => String(c.id) === String(id));
 
   const [playerData, setPlayerData] = useState(null);
   const [openSection, setOpenSection] = useState({});
-  const [courseData,setCourseData]=useState(null);
 
-  // const getCourseData=()=>{
-  //   enrolledCourses.map((course)=>{
-  //     if(course.id===id){
-  //       setCourseData(course)
-  //     }
-  //   })
-  // }
-  // useEffect(()=>{
-  //   getCourseData()
-  // },[enrolledCourse])
-
-  if (!course) return <h2 className="text-center mt-10">Course not found</h2>;
+  if (!course)
+    return (
+      <h2 className="text-center mt-10 text-xl font-semibold text-red-500">
+        Course not found
+      </h2>
+    );
 
   const toggleSection = (index) => {
     setOpenSection((prev) => ({ ...prev, [index]: !prev[index] }));
@@ -46,12 +36,13 @@ const Player = ({courses}) => {
   };
 
   return (
-    <div className="p-4 sm:p-10 flex flex-col-reverse md:grid md:grid-cols-2 gap-10 md:px-36">
-      {/* Left: Course Content */}
-      <div>
-        <h2 className="text-xl font-bold mb-4">{course.title} - Structure</h2>
-        <div className="divide-y divide-base-300 rounded-lg border border-base-300 shadow bg-base-100">
-          {courseData && course.courseContent.map((chapter, index) => (
+    <div className="p-4 sm:p-10 flex flex-col-reverse md:grid md:grid-cols-3 gap-8 md:px-20">
+      {/* Left: Course Content  */}
+      <div className="md:col-span-1">
+        <h2 className="text-2xl font-bold mb-6">{course.title} - Curriculum</h2>
+
+        <div className="space-y-4">
+          {course.courseContent.map((chapter, index) => (
             <div key={chapter.chapterId} className="collapse collapse-arrow">
               <input
                 type="checkbox"
@@ -65,66 +56,91 @@ const Player = ({courses}) => {
                   {calculateChapterTime(chapter)}
                 </p>
               </div>
-              <div className="collapse-content">
+
+              {openSection[index] && (
                 <ul className="space-y-2">
-                  {chapter.chapterContent.map((lecture) => (
-                    <li
-                      key={lecture.lectureId}
-                      className="flex justify-between items-start p-2 rounded-md hover:bg-base-200 transition"
-                    >
-                      <div className="flex items-start gap-2">
-                      <img src={false?<Play className="w-4 h-4 text-primary mt-1" />:<Pause/>}/>
-                        <Play className="w-4 h-4 text-primary mt-1" />
-                        <div>
-                          <p className="text-sm font-medium leading-snug">
-                            {lecture.lectureTitle}
-                          </p>
-                          {lecture.lectureUrl && (
-                            <span
-                              onClick={() =>
-                                setPlayerData({
-                                 ...lecture, chapter:index+1,lecture:i+1
-                                })
-                              }
-                              className=""
-                            >
-                             Watch
-                            </span>
+                  {chapter.chapterContent.map((lecture, lecIndex) => {
+                    const isPlaying =
+                      playerData &&
+                      playerData.chapter === index + 1 &&
+                      playerData.lecture === lecIndex + 1;
+
+                    return (
+                      <li
+                        key={lecture.lectureId}
+                        className={`flex justify-between items-start p-2 rounded-md transition cursor-pointer ${
+                          isPlaying ? "bg-primary/20" : "hover:bg-base-200"
+                        }`}
+                        onClick={() => {
+                          if (isPlaying) setPlayerData(null);
+                          else
+                            setPlayerData({
+                              ...lecture,
+                              chapter: index + 1,
+                              lecture: lecIndex + 1,
+                            });
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          {isPlaying ? (
+                            <Pause className="w-5 h-5 text-primary transform transition-transform duration-200 scale-110" />
+                          ) : (
+                            <Play className="w-5 h-5 text-primary transform transition-transform duration-200 hover:scale-125" />
                           )}
-                          <p className="text-xs text-gray-500 mt-1">
-                            {humanizeDuration(
-                              lecture.lectureDuration * 60 * 1000,
-                              { units: ["h", "m"], round: true, spacer: "" }
-                            )}
-                          </p>
+
+                          <div>
+                            <p className="text-sm font-medium">
+                              {lecture.lectureTitle}
+                            </p>
+                            <p className="text-xs text-gray-500 mt-0.5">
+                              {humanizeDuration(
+                                lecture.lectureDuration * 60 * 1000,
+                                {
+                                  units: ["h", "m"],
+                                  round: true,
+                                  spacer: "",
+                                }
+                              )}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    );
+                  })}
                 </ul>
-              </div>
+              )}
             </div>
           ))}
         </div>
-        <div>
-          <h1>Rate this Course:</h1>
-          <Rating initialRating={0}/>
+
+        {/* Rating Section */}
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold mb-2">Rate this Course:</h3>
+          <Rating initialRating={0} />
         </div>
       </div>
 
-      {/* Right: Player */}
-      <div className="rounded-lg border border-base-300 shadow bg-base-100 p-4">
-        <h2 className="text-lg font-bold mb-2">Now Playing</h2>
+      {/* Right: Player  */}
+      <div className="md:col-span-2 sticky top-6 rounded-lg border border-base-300 shadow-lg bg-base-100 p-4 h-fit">
+        <h2 className="text-lg font-bold mb-3">Now Playing</h2>
         {playerData ? (
           <iframe
             className="w-full aspect-video rounded"
-            src={`https://www.youtube.com/embed/${playerData.videoId}`}
-            title="Course Video"
+            src={`https://www.youtube.com/embed/${
+              playerData.lectureUrl?.split("youtu.be/")[1]
+            }`}
+            title={playerData.lectureTitle}
             frameBorder="0"
             allowFullScreen
           ></iframe>
         ) : (
-          <p className="text-gray-500">Select a lecture to start playing</p>
+          <div className="relative flex justify-center items-center">
+            <img
+              src={course.image}
+              alt={course.title}
+              className="w-full rounded-lg shadow-md object-cover max-h-96"
+            />
+          </div>
         )}
       </div>
     </div>
