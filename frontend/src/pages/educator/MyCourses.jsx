@@ -37,7 +37,7 @@ const MyCourses = () => {
                     <img
                       src={course.image}
                       alt={course.title}
-                      className="w-12 h-12 rounded-lg shadow-md"
+                      className="w-24 h-12 rounded-lg shadow-md"
                     />
                     <span className="font-medium">{course.title}</span>
                   </td>

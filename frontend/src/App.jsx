@@ -27,6 +27,7 @@ import Dashboard from "./pages/educator/Dashboard";
 import AddCourse from "./pages/educator/AddCourse";
 import StudentsEnrolled from "./pages/educator/StudentsEnrolled";
 import MyCourses from "./pages/educator/MyCourses";
+import "quill/dist/quill.snow.css";
 
 export default function App() {
 const location = useLocation();
