@@ -8,6 +8,7 @@ import cors from "cors"
 import path from "path";
 import { app, server } from "./lib/socket.js";
 import paymentRoute from "./Routes/payment.route.js"
+import educatorRoute from "./Routes/educator.route.js"
 dotenv.config({ path: "../.env" });
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/messages",messageRoute);
 app.use("/api/payment",paymentRoute);
+app.use("/api/educator",educatorRoute);
 
 // Ensure PORT is properly defined
 const PORT=process.env.PORT || 5000;

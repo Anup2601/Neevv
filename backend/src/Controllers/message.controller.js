@@ -6,14 +6,12 @@ import { getReceiverSocket, io } from "../lib/socket.js";
 
 export const getUsersForSlidebar = async(req,res) =>{
     try {
-        // console.log("🔹 Requesting Users for Sidebar...");
-        // console.log("🔍 Logged-in User ID:", req.user?._id);
 
         if (!req.user) {
-            console.warn("⚠️ req.user is undefined!");
-            return res.status(401).json({ message: "Unauthorized: No user info" });
-          }
-          
+            console.log("User not found!");
+            return res.status(404).json({ message: "User not found" });
+        }
+
         const loggedInUserId=req.user._id;
         const filteredUsers= await User.find({_id:{$ne : loggedInUserId}}).select("-password");
         res.status(200).json(filteredUsers);
