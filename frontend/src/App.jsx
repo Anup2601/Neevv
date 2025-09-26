@@ -28,6 +28,16 @@ import AddCourse from "./pages/educator/AddCourse";
 import StudentsEnrolled from "./pages/educator/StudentsEnrolled";
 import MyCourses from "./pages/educator/MyCourses";
 import "quill/dist/quill.snow.css";
+import InternshipPage from "./pages/Internship";
+import JobPage from "./pages/JobPage";
+import MentorPage from "./pages/MentorPage";
+import PracticePage from "./pages/PracticePage";
+import CompetitionPage from "./pages/CompetitionPage";
+import ScholarshipsPage from "./pages/ScholarshipsPage";
+import CulturalEventsPage from "./pages/CulturalEventsPage";
+import WorkshopsPage from "./pages/WorkshopsPage";
+import ConferencePage from "./pages/ConferencesPage";
+import BlogPage from "./pages/BlogPage";
 
 export default function App() {
 const location = useLocation();
@@ -68,6 +78,17 @@ if(isCheckingAuth && !authUser){
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
 
         <Route path="/payment" element={authUser ? <PaymentPage /> : <Navigate to="/login" />} />
+
+        <Route path="/internships" element={authUser ? <InternshipPage /> : <Navigate to="/login" />} />
+        <Route path="/jobs" element={authUser ? <JobPage /> : <Navigate to="/login" />} />
+        <Route path="/mentors" element={authUser ? <MentorPage /> : <Navigate to="/login" />} />
+        <Route path="/practice" element={authUser ? <PracticePage /> : <Navigate to="/login" />} />
+        <Route path="/competition" element={authUser ? <CompetitionPage /> : <Navigate to="/login" />} />
+        <Route path="/scholarships" element={authUser ? <ScholarshipsPage /> : <Navigate to="/login" />} />
+        <Route path="/cultural-events" element={authUser ? <CulturalEventsPage /> : <Navigate to="/login" />} />
+        <Route path="/workshops" element={authUser ? <WorkshopsPage /> : <Navigate to="/login" />} />
+        <Route path="/conferences" element={authUser ? <ConferencePage /> : <Navigate to="/login" />} />
+        <Route path="/blog" element={authUser ? <BlogPage /> : <Navigate to="/login" />} />
 
         <Route path="/educator" element={authUser ? <Educator /> : <Navigate to="/login" />} >
           <Route path="dashboard" element={<Dashboard/>} />
